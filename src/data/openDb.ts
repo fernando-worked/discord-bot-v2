@@ -5,5 +5,5 @@ export async function openDb () {
   return open({
     filename: "src/data/db/database.db",
     driver: sqlite3.Database
-  })
+  });
 }

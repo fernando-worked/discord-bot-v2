@@ -1,4 +1,4 @@
-import { teste } from "@/data/pontos";
+import { teste } from "@/data/teste";
 import { log } from "@/settings";
 import { Event } from "@discord/base";
 import { sleep } from "@magicyan/discord";

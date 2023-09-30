@@ -20,7 +20,7 @@
       "@/*":["./src/*"],
       "@discord/*":["./src/discord/*"],
       "@functions/*":["./src/functions/*"],
-      "@settings/*":["./src/settings/*"]
+      "@settings/*":["./src/settings/*"],
     },
     "typeRoots": [
       "./node_modules/@types"
