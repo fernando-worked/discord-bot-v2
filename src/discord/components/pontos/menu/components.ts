@@ -1,11 +1,12 @@
 import { Component } from "@/discord/base";
 import { addPontos } from "@/functions/pontos/addPontos";
-import { GuildMember } from "discord.js";
+
 
 let responsavelId: string[] = [];
 let membrosId: string[] = [];
 let tipos: string[] = [];
 let tags: string[] = [];
+let interacao: string;
 
 new Component({ /* slc_responsavel */
     customId: "slc_responsavel",
@@ -66,9 +67,15 @@ new Component({ /* btn_submit_pontos */
     async run(interaction) {
         interaction.reply({ephemeral: true, content: "Clicou no Submit"});
 
+        console.log(interaction);
+        
         addPontos(responsavelId, membrosId, tipos, tags);
 
-        console.log(`Responsável ${responsavelId}\nMembros ${membrosId}\ntipos ${tipos}\ntags ${tags}`);
+        responsavelId = [];
+        membrosId = [];
+        tipos = [];
+        tags = [];
+
     },
 });
 
