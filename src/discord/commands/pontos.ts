@@ -1,4 +1,4 @@
-import { ActionRowBuilder, ApplicationCommandOptionType, ApplicationCommandType, ButtonBuilder, ButtonStyle, ComponentType, UserSelectMenuBuilder } from "discord.js";
+import { ActionRowBuilder, ApplicationCommandOptionType, ApplicationCommandType, ButtonBuilder, ButtonStyle, ComponentType, StringSelectMenuBuilder, UserSelectMenuBuilder } from "discord.js";
 import { Command } from "../base";
 
 new Command({
@@ -13,6 +13,12 @@ new Command({
         }
     ],
     async run(interaction){
+
+        if(interaction.user.id != interaction.guild.ownerId) return interaction.reply({
+            ephemeral: true,
+            content: "Você está fuçando onde não deveria...",
+        });
+
         const { options } = interaction;
 
         switch(options.getSubcommand()){
@@ -48,7 +54,7 @@ new Command({
             const usersSlc = new UserSelectMenuBuilder({
                 customId: "slc_membros",
                 minValues: 1,
-                maxValues: 10,
+                maxValues: 20,
                 type: ComponentType.UserSelect,
                 placeholder: "Selecione os usuários para aplicar a pontuação",
             });
@@ -57,10 +63,85 @@ new Command({
                 components: [usersSlc],
             });
 
+            const tipoSlc = new StringSelectMenuBuilder({
+                customId: "slc_tipo",
+                minValues: 1,
+                maxValues: 1,
+                type: ComponentType.StringSelect,
+                options: [{
+                    label:"Treinamento CQB",
+                    value:"CQB",
+                    description:"Qualifica os membros listados como CQB",
+                },
+                {
+                    label:"Missão oficial",
+                    value:"MOF",
+                    description:"Usado apenas nas missões oficiais do servidor",
+                },
+                {
+                    label:"Missão não oficial",
+                    value:"MNF",
+                    description:"Pode ser usado para demais missões de players",
+                }],
+                placeholder: "Selecione o tipo da operação",
+            });
+
+            const rowtiposSlc = new ActionRowBuilder<StringSelectMenuBuilder>({
+                components: [tipoSlc],
+            });
+
+            const tagsSlc = new StringSelectMenuBuilder({
+                customId: "slc_tags",
+                minValues: 1,
+                maxValues: 7,
+                type: ComponentType.StringSelect,
+                options: [
+                {
+                    label:"Grade S",
+                    value:"GRADE_S",
+                    description:"Para missões com resultado S+",
+                },
+                {
+                    label:"Grade A",
+                    value:"GRADE_A",
+                    description:"Para missões com resultado A+",
+                },
+                {
+                    label:"Grade B",
+                    value:"GRADE_B",
+                    description:"Para missões com resultado B+",
+                },
+                {
+                    label:"Bom roleplay",
+                    value:"RP",
+                    description:"Será atribuído quando houver um bom roleplay na missão",
+                },
+                {
+                    label:"Anti-RP",
+                    value:"ANTIRP",
+                    description:"Usado quando houver atitudes anti-RP na operação",
+                },
+                {
+                    label:"KIA",
+                    value:"KIA",
+                    description:"Atribuído quando houver morte de operador (Killed in Action)",
+                },
+                {
+                    label:"Morte de Refém",
+                    value:"REFEM",
+                    description:"Caso haja morte de reféns na operação",
+                }],
+                placeholder: "Selecione as tags adicionais da operação",
+            });
+
+            const rowtagsSlc = new ActionRowBuilder<StringSelectMenuBuilder>({
+                components: [tagsSlc],
+            });
+
             interaction.reply({
                 ephemeral: true,
                 content: "Preencha para adicionar pontos",
-                components:[rowResponsavelSlc, rowMembrosSlc, rowBtn] 
+                components:[rowResponsavelSlc, rowtiposSlc, rowtagsSlc, rowMembrosSlc, rowBtn] 
             });
             break;
         }
