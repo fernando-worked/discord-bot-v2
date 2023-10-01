@@ -1,12 +1,16 @@
 import { Component } from "@/discord/base";
 import { addPontos } from "@/functions/pontos/addPontos";
 
-
 let responsavelId: string[] = [];
 let membrosId: string[] = [];
 let tipos: string[] = [];
 let tags: string[] = [];
-let interacao: string;
+
+/*TODO
+    verificar melhor forma de validar o formulário
+
+
+*/
 
 new Component({ /* slc_responsavel */
     customId: "slc_responsavel",
@@ -22,7 +26,9 @@ new Component({ /* slc_responsavel */
             responsavelId.push(member.id);
         });
 
-        interaction.reply({ephemeral: true, content: "Responsável selecionado!"});
+        const interacao = await interaction.deferReply({ephemeral: true});
+        interacao.delete();   
+
 
         // do things...
     },
@@ -43,7 +49,8 @@ new Component({ /* slc_membros */
         });
 
 
-        interaction.reply({ephemeral: true, content: "Membros selecionados!"});
+        const interacao = await interaction.deferReply({ephemeral: true});
+        interacao.delete();    
 
         // do things...
     },
@@ -54,9 +61,8 @@ new Component({ /* btn_cancel_pontos */
     cache: "cached",
     type: "Button",
     async run(interaction) {
-        interaction.reply({ephemeral: true, content: "Clicou em Cancelar"});
+        interaction.channel?.messages.delete(interaction.message.id);
 
-        // do things...
     },
 });
 
@@ -65,10 +71,10 @@ new Component({ /* btn_submit_pontos */
     cache: "cached",
     type: "Button",
     async run(interaction) {
-        interaction.reply({ephemeral: true, content: "Clicou no Submit"});
+        //interaction.channel?.messages.delete(interaction.message.id);
 
-        console.log(interaction);
-        
+        interaction.reply({ephemeral: true, content: "Formulário submetido!"});
+
         addPontos(responsavelId, membrosId, tipos, tags);
 
         responsavelId = [];
@@ -91,7 +97,8 @@ new Component({ /* slc_tipo */
             tipos.push(value);
         });
 
-        interaction.reply({ephemeral: true, content: "Clicou em Cancelar"});
+        const interacao = await interaction.deferReply({ephemeral: true});
+        interacao.delete();   
     },
 });
 
@@ -106,6 +113,7 @@ new Component({ /* slc_tags */
             tags.push(value);
         });
 
-        interaction.reply({ephemeral: true, content: "Clicou em Cancelar"});
+        const interacao = await interaction.deferReply({ephemeral: true});
+        interacao.delete();  
     },
 });

@@ -1,4 +1,4 @@
-import { ActionRowBuilder, ApplicationCommandOptionType, ApplicationCommandType, ButtonBuilder, ButtonStyle, ComponentType, StringSelectMenuBuilder, UserSelectMenuBuilder } from "discord.js";
+import { ActionRowBuilder, ApplicationCommandOptionType, ApplicationCommandType, ButtonBuilder, ButtonStyle, ChatInputCommandInteraction, ComponentType, ModalBuilder, StringSelectMenuBuilder, UserSelectMenuBuilder } from "discord.js";
 import { Command } from "../base";
 
 new Command({
@@ -15,7 +15,7 @@ new Command({
     async run(interaction){
 
         if(interaction.user.id != interaction.guild.ownerId) return interaction.reply({
-            ephemeral: true,
+            ephemeral: false,
             content: "Você está fuçando onde não deveria...",
         });
 
@@ -23,6 +23,7 @@ new Command({
 
         switch(options.getSubcommand()){
         case "menu":
+
             const buttonEnviar = new ButtonBuilder({
                 customId: "btn_submit_pontos",
                 label: "Enviar",
@@ -138,11 +139,15 @@ new Command({
                 components: [tagsSlc],
             });
 
-            interaction.reply({
+
+            interaction.reply({       
                 ephemeral: true,
                 content: "Preencha para adicionar pontos",
-                components:[rowResponsavelSlc, rowtiposSlc, rowtagsSlc, rowMembrosSlc, rowBtn] 
+                components:[rowResponsavelSlc, rowtiposSlc, rowtagsSlc, rowMembrosSlc, rowBtn],
             });
+
+            
+            
             break;
         }
     },
