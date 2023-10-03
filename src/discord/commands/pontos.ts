@@ -1,5 +1,7 @@
-import { ActionRowBuilder, ApplicationCommandOptionType, ApplicationCommandType, ButtonBuilder, ButtonStyle, ChatInputCommandInteraction, ComponentType, ModalBuilder, StringSelectMenuBuilder, UserSelectMenuBuilder } from "discord.js";
+import { ActionRowBuilder, ApplicationCommandOptionType, ApplicationCommandType, ButtonBuilder, ButtonStyle, ChatInputCommandInteraction, ComponentType, InteractionResponse, ModalBuilder, StringSelectMenuBuilder, UserSelectMenuBuilder } from "discord.js";
 import { Command } from "../base";
+
+export let interacaoPontos: Promise<InteractionResponse<true>>;
 
 new Command({
     name: "pontos", dmPermission,
@@ -140,13 +142,11 @@ new Command({
             });
 
 
-            interaction.reply({       
+            interacaoPontos = interaction.reply({       
                 ephemeral: true,
                 content: "Preencha para adicionar pontos",
                 components:[rowResponsavelSlc, rowtiposSlc, rowtagsSlc, rowMembrosSlc, rowBtn],
             });
-
-            
             
             break;
         }
@@ -154,3 +154,4 @@ new Command({
     
     
 });
+

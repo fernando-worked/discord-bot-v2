@@ -1,4 +1,5 @@
 import { Component } from "@/discord/base";
+import { interacaoPontos } from "@/discord/commands/pontos";
 import { addPontos } from "@/functions/pontos/addPontos";
 
 let responsavelId: string[] = [];
@@ -10,7 +11,15 @@ let tags: string[] = [];
     verificar melhor forma de validar o formulário
 
 
+    roleplay cargos set 
+cargo
+pontos
+validade
+categoria -> patente, medalha
+
 */
+
+
 
 new Component({ /* slc_responsavel */
     customId: "slc_responsavel",
@@ -61,7 +70,11 @@ new Component({ /* btn_cancel_pontos */
     cache: "cached",
     type: "Button",
     async run(interaction) {
-        interaction.channel?.messages.delete(interaction.message.id);
+
+        const i = interaction.deferReply();
+        (await i).delete();
+
+        (await interacaoPontos).delete();
 
     },
 });
@@ -71,11 +84,12 @@ new Component({ /* btn_submit_pontos */
     cache: "cached",
     type: "Button",
     async run(interaction) {
-        //interaction.channel?.messages.delete(interaction.message.id);
-
-        interaction.reply({ephemeral: true, content: "Formulário submetido!"});
 
         addPontos(responsavelId, membrosId, tipos, tags);
+
+        interaction.reply({ephemeral: true, content: "✅ Formulário submetido!"});
+
+        (await interacaoPontos).delete();
 
         responsavelId = [];
         membrosId = [];
