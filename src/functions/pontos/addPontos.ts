@@ -6,9 +6,9 @@ export const addPontos = async (responsavel: string[], membros: string[], tipo: 
     membros.forEach((membro) => {
         
         db.run( "INSERT INTO pontuacao (responsavel, membro, pontos, data_inclusao, data_validade) VALUES (?,?,?,?,?)", responsavel[0], membro, pontuacao, getCurrentISO8601Date(), getCurrentISO8601Date(30));
-        db.close();
        
     });
+    db.close();
 
 };
 
