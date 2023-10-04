@@ -6,8 +6,6 @@ new Component({
     type: "Button", cache: "cached",
     async run(interaction) {
 
-        return interaction.reply({ephemeral: true, content: "Você não tem permissão para fazer isso"});
-
         const oldEmbed = interaction.message.embeds[0];
         
         const embed = new EmbedBuilder()
@@ -25,13 +23,13 @@ new Component({
         })
         .setFields([
             {
-                name: "Oficial",
+                name: "Responsável",
                 value: oldEmbed.author ? oldEmbed.author.name : "",
                 inline: true,
             },
             {
                 name: "Pontos informados",
-                value: oldEmbed.fields[0].value,
+                value: oldEmbed.fields[1].value,
                 inline: true,
             },
             {
@@ -43,6 +41,11 @@ new Component({
                 name: "Situação",
                 value: "Aprovado",
                 inline: true,
+            },
+            {
+                name: "Membros",
+                value: oldEmbed.fields[2].value,
+                inline: false,
             },
            
         ])
