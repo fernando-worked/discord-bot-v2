@@ -56,6 +56,8 @@ new Component({
             style: ButtonStyle.Primary
         });
 
+        membrosRelatorio.splice(0, membrosRelatorio.length);
+
         const rowBtn = new ActionRowBuilder<ButtonBuilder>({components: [btnAprovar, btnRecusar]});
 
         interaction.channel?.send({embeds: [embed], components: [rowBtn]});

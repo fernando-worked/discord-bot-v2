@@ -1,4 +1,5 @@
 import { Component } from "@/discord/base";
+import { aprovarRelatorio } from "@/functions/relatorio/aprovar";
 import { EmbedBuilder } from "discord.js";
 
 new Component({
@@ -7,6 +8,8 @@ new Component({
     async run(interaction) {
 
         const oldEmbed = interaction.message.embeds[0];
+
+        aprovarRelatorio(interaction.message.id, interaction.user.id/* forma incorreta, buscar author */, Number(oldEmbed.fields[1].value), interaction.user.id, oldEmbed.fields[2].value.split('\n'));
         
         const embed = new EmbedBuilder()
         .setTitle("Situação do relatório")

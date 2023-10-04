@@ -18,7 +18,7 @@ new Component({
         })
         .setFields([
             {
-                name: "Oficial",
+                name: "Responsável",
                 value: oldEmbed.author ? oldEmbed.author!.name : "",
                 inline: true,
             },

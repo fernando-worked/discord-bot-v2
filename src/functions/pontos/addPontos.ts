@@ -1,3 +1,4 @@
+import { getCurrentISO8601Date } from "../util";
 import { openDb } from "./../../data/openDb";
 
 export const addPontos = async (responsavel: string[], membros: string[], tipo: string[], tags: string[]) =>{
@@ -61,12 +62,4 @@ function calcularPontuacao(tipos: string[], tags: string[]) : number{
     });
 
     return pontuacao;
-}
-
-function getCurrentISO8601Date(dias: number = 0): string {
-    const now: Date = new Date();
-    now.setDate(now.getDate() + dias);
-
-    const isoString: string = now.toISOString();
-    return isoString;
 }
