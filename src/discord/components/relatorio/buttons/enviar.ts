@@ -2,6 +2,7 @@ import { Component } from "@/discord/base";
 import { interacaoRelatorio } from "@/discord/commands/relatorio";
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder } from "discord.js";
 import { membrosRelatorio } from "../selects/membros";
+import { enviarRelatorio } from "@/functions/relatorio/enviar";
 
 new Component({
     customId: "btn_enviar_relatorio",
@@ -11,6 +12,8 @@ new Component({
         console.log(interaction.message.components[0].data);
 
         const oldEmbed = interaction.message.embeds[0];
+
+        enviarRelatorio(interaction.message.id, interaction.user.id, Number(oldEmbed.fields[0].value), membrosRelatorio);
         
         const embed = new EmbedBuilder()
         .setTitle("Novo relatório enviado!")
@@ -36,7 +39,11 @@ new Component({
                 value: membrosRelatorio.length > 0 ? membrosRelatorio.join("\n" ): interaction.user.id,
                 inline: false,
             },
-           
+            {
+                name: "Relatório",
+                value: interaction.message.id,
+                inline: true,
+            },          
         ])
         .setTimestamp()
         .setImage(oldEmbed.image?.url || null)

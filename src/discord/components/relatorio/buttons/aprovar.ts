@@ -9,7 +9,7 @@ new Component({
 
         const oldEmbed = interaction.message.embeds[0];
 
-        aprovarRelatorio(interaction.message.id, interaction.user.id/* forma incorreta, buscar author */, Number(oldEmbed.fields[1].value), interaction.user.id, oldEmbed.fields[2].value.split('\n'));
+        //aprovarRelatorio(interaction.message.id, interaction.user.id/* forma incorreta, buscar author */, Number(oldEmbed.fields[1].value), interaction.user.id, oldEmbed.fields[2].value.split('\n'));
         
         const embed = new EmbedBuilder()
         .setTitle("Situação do relatório")
@@ -19,21 +19,16 @@ new Component({
             name: interaction.user.displayName,
             iconURL: interaction.user.avatarURL() || undefined
         })
-        .setFields(
-        {
-            name: "Pontos informados pelo usuário",
-            value: oldEmbed.fields[0].value,
-        })
         .setFields([
             {
-                name: "Responsável",
+                name: "Autor",
                 value: oldEmbed.author ? oldEmbed.author.name : "",
                 inline: true,
             },
             {
                 name: "Pontos informados",
                 value: oldEmbed.fields[1].value,
-                inline: true,
+                inline: false,
             },
             {
                 name: "Avaliador",
@@ -50,7 +45,11 @@ new Component({
                 value: oldEmbed.fields[2].value,
                 inline: false,
             },
-           
+            {
+                name: "Relatório",
+                value: oldEmbed.fields[3].value,
+                inline: true,
+            },          
         ])
         .setTimestamp()
         .setImage(oldEmbed.image?.url || null)

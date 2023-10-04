@@ -18,8 +18,8 @@ new Component({
         })
         .setFields([
             {
-                name: "Responsável",
-                value: oldEmbed.author ? oldEmbed.author!.name : "",
+                name: "Autor",
+                value: oldEmbed.author ? oldEmbed.author.name : "",
                 inline: true,
             },
             {
@@ -42,6 +42,11 @@ new Component({
                 value: oldEmbed.fields[2].value,
                 inline: false,
             },
+            {
+                name: "Relatório",
+                value: oldEmbed.fields[3].value,
+                inline: true,
+            }, 
            
         ])
         .setTimestamp()
