@@ -77,6 +77,7 @@ new Command({
         const rowBtn = new ActionRowBuilder<ButtonBuilder>({components: [btnAprovar, btnRecusar]});
 
         interacaoRelatorio = interaction.reply({ephemeral: true, embeds: [embed], components: [rowMembrosSlc, rowBtn]});
+
         interacaoRelatorioArray.push(interacaoRelatorio);
 
     }
