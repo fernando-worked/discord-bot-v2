@@ -1,3 +1,4 @@
+import { UserDataDb } from "@/data/getUserData";
 import { Component } from "@/discord/base";
 import { atualizarRelatorio } from "@/functions/relatorio/atualizar";
 import { EmbedBuilder } from "discord.js";
@@ -9,8 +10,12 @@ new Component({
 
         const oldEmbed = interaction.message.embeds[0];
 
-        atualizarRelatorio(oldEmbed.fields[3].value, interaction.user.id, "A", oldEmbed.fields[2].value.split("\n"));
+        let userData: UserDataDb[] = [];
+
+        userData = await atualizarRelatorio(oldEmbed.fields[3].value, interaction.user.id, "A", oldEmbed.fields[2].value.split("\n"));
         
+        console.log(userData);
+
         const embed = new EmbedBuilder()
         .setTitle("Situação do relatório")
         .setDescription("Confira a situação do relatório abaixo")

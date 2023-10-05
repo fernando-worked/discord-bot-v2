@@ -1,16 +1,14 @@
 import { openDb } from "../../data/openDb";
 
-export const setPontosCargo = async (cargoId: string, pontos: number, categoria: string, validade: number) =>{
+export const setPontosCargo = async (cargoId: string, pontos: number, categoria: string) =>{
     const db = await openDb();
 
+    const result = await db.all("select cargo_id from cargos where cargo_id = ?", [cargoId]);
 
-    const result = await db.all("select cargo_id from cargos_roleplay where cargo_id = ?", [cargoId]);
-
-    console.log(result);
     if(result.length == 0){
-        db.run("INSERT INTO cargos_roleplay (cargo_id, pontuacao, categoria, validade) VALUES (?,?,?,?)", cargoId, pontos, categoria, validade);
+        db.run("INSERT INTO cargos (cargo_id, pontos, categoria) VALUES (?,?,?)", cargoId, pontos, categoria);
     }else{
-        db.run("UPDATE cargos_roleplay set pontuacao = ?, categoria = ?, validade = ? where cargo_id = ?", pontos, categoria, validade, cargoId);
+        db.run("UPDATE cargos set pontos = ?, categoria = ? where cargo_id = ?", pontos, categoria, cargoId);
     }
 
     db.close();

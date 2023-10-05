@@ -1,10 +1,10 @@
-import { cliente } from "@/discord/events/example";
+import { meuBot as cliente } from "@/discord/events/example";
 import { openDb } from "../../data/openDb";
 
 export const resetCargos = async () =>{
     const db = await openDb();
 
-    const result = await db.all("select cargo_id from cargos_roleplay");
+    const result = await db.all("select cargo_id from cargos");
 
     console.log(result);
 

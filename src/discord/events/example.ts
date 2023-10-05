@@ -5,13 +5,13 @@ import { sleep } from "@magicyan/discord";
 import ck from "chalk";
 import { Client } from "discord.js";
 
-export let cliente: Client<true>;
+export let meuBot: Client<true>;
 
 new Event({
     name: "ready", once: true, 
     async run(client) {
 
-        cliente = client;
+        meuBot = client;
 
         await sleep(2000);
         log.success(ck.green("Everything is working correctly!"));

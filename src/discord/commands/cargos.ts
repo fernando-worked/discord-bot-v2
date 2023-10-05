@@ -40,18 +40,7 @@ new Command({
                     name:"Medalha", value: "MEDALHA"
                 }]
             },
-            {
-                name: "validade",
-                description: "Verifica se a pontuação será considerada apenas não vencidos",
-                type: ApplicationCommandOptionType.String,
-                required: true,
-                choices:[{
-                    name:"Sim", value: "1"
-                },
-                {
-                    name:"Não", value: "0"
-                }]
-            }]
+            ]
         },
         {
             name: "unset",
@@ -83,17 +72,14 @@ new Command({
         switch(options.getSubcommand()){
         case "set":
 
-            const cargoSet = options.getRole("cargo");
-            const pontos = options.getInteger("pontos");
-            const categoria = options.getString("categoria");
-            const validade = Number(options.getString("validade"));
+             console.log("1");
 
-            if(!cargoSet) return;
-            if(!pontos) return;
-            if(!categoria) return;
-            if(!validade) return;
 
-            setPontosCargo(cargoSet.id, pontos, categoria, validade);   
+            const cargoSet = options.getRole("cargo", true);
+            const pontos = options.getInteger("pontos", true);
+            const categoria = options.getString("categoria", true);
+
+            setPontosCargo(cargoSet.id, pontos, categoria);   
 
             interaction.reply({ephemeral: true, content: "Atualizado com sucesso!"});
 
