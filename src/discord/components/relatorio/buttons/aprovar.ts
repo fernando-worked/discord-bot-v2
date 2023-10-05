@@ -61,5 +61,5 @@ new Component({
         if(msg)
         (await msg).delete();
 
-    },
+    }, 
 });

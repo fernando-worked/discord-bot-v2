@@ -3,8 +3,9 @@ import { ActionRowBuilder, ApplicationCommandOptionType, ApplicationCommandType,
 
 const members: Collection<string, Attachment> = new Collection();
 
-export let interacaoRelatorio: InteractionResponse<true>;
-export let interacaoRelatorioArray: InteractionResponse<true>[] = [];
+let interacaoRelatorio: InteractionResponse<true>;
+let interacaoRelatorioArray: InteractionResponse<true>[] = [];
+export let mapInteracaoRelatorio: Map<string, InteractionResponse<true>[]> = new Map();
 
 new Command({ 
     name: "relatorio",
@@ -84,8 +85,8 @@ new Command({
         });
 
         interacaoRelatorioArray.push(interacaoRelatorio);
+        mapInteracaoRelatorio.set(interaction.user.id, interacaoRelatorioArray);
 
-        console.log(interacaoRelatorioArray.length);
 
     }
 });

@@ -1,8 +1,10 @@
 import { Component } from "@/discord/base";
-import { interacaoRelatorioArray } from "@/discord/commands/relatorio";
+import { mapInteracaoRelatorio } from "@/discord/commands/relatorio";
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder } from "discord.js";
-import { membrosRelatorio } from "../selects/membros";
+import { valoresSelectUsuarioRelatorio } from "../selects/membros";
 import { enviarRelatorio } from "@/functions/relatorio/enviar";
+
+
 
 new Component({
     customId: "btn_enviar_relatorio",
@@ -32,7 +34,7 @@ new Component({
             },
             {
                 name: "Membros",
-                value: membrosRelatorio.length > 0 ? membrosRelatorio.join("\n" ): interaction.user.id,
+                value: valoresSelectUsuarioRelatorio.get(interaction.user.id) != null ? valoresSelectUsuarioRelatorio.get(interaction.user.id)!.join("\n" ): interaction.user.id,
                 inline: false,
             },
             {
@@ -59,8 +61,6 @@ new Component({
             style: ButtonStyle.Primary
         });
 
-        membrosRelatorio.splice(0, membrosRelatorio.length);
-
         const rowBtn = new ActionRowBuilder<ButtonBuilder>({components: [btnAprovar, btnRecusar]});
 
         const respostaAtual = await interaction.channel?.send({embeds: [embed], components: [rowBtn]});
@@ -69,9 +69,9 @@ new Component({
 
         enviarRelatorio(interaction.message.id, interaction.user.id, Number(oldEmbed.fields[0].value), embedEnviado!.fields[2].value.split("\n"));
 
-        interacaoRelatorioArray.forEach(async (elemento, index) => {
+        mapInteracaoRelatorio.get(interaction.user.id)!.forEach(async (elemento, index) => {
             elemento.delete();
-            interacaoRelatorioArray.splice(index, 1);
+            mapInteracaoRelatorio.get(interaction.user.id)!.splice(index, 1);
         });
 
     },
