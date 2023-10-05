@@ -3,10 +3,10 @@ import { ActionRowBuilder, ApplicationCommandOptionType, ApplicationCommandType,
 
 const members: Collection<string, Attachment> = new Collection();
 
-let interacaoRelatorio: Promise<InteractionResponse<true>>;
-export let interacaoRelatorioArray: Promise<InteractionResponse<true>>[];
+export let interacaoRelatorio: InteractionResponse<true>;
+export let interacaoRelatorioArray: InteractionResponse<true>[] = [];
 
-new Command({
+new Command({ 
     name: "relatorio",
     description: "Envie um relatório de missão",
     type: ApplicationCommandType.ChatInput,
@@ -25,7 +25,7 @@ new Command({
             required: true,
         },
     ],
-    run(interaction) {
+    async run(interaction) {
         const { options } = interaction;
 
         const image = options.getAttachment("imagem", true);
@@ -76,9 +76,16 @@ new Command({
 
         const rowBtn = new ActionRowBuilder<ButtonBuilder>({components: [btnAprovar, btnRecusar]});
 
-        interacaoRelatorio = interaction.reply({ephemeral: true, embeds: [embed], components: [rowMembrosSlc, rowBtn]});
+        interacaoRelatorio = await interaction.reply({ephemeral: true, embeds: [embed], components: [rowMembrosSlc, rowBtn]});
+
+        interacaoRelatorioArray.forEach(async (elemento, index) => {
+            elemento.delete();
+            interacaoRelatorioArray.splice(index, 1);
+        });
 
         interacaoRelatorioArray.push(interacaoRelatorio);
+
+        console.log(interacaoRelatorioArray.length);
 
     }
 });

@@ -1,5 +1,5 @@
 import { Component } from "@/discord/base";
-import { interacaoRelatorio, interacaoRelatorioArray } from "@/discord/commands/relatorio";
+import { interacaoRelatorioArray } from "@/discord/commands/relatorio";
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder } from "discord.js";
 import { membrosRelatorio } from "../selects/membros";
 import { enviarRelatorio } from "@/functions/relatorio/enviar";
@@ -69,9 +69,9 @@ new Component({
 
         enviarRelatorio(interaction.message.id, interaction.user.id, Number(oldEmbed.fields[0].value), embedEnviado!.fields[2].value.split("\n"));
 
-
-        interacaoRelatorioArray.forEach(async (elemento) => {
-            (await elemento).delete();
+        interacaoRelatorioArray.forEach(async (elemento, index) => {
+            elemento.delete();
+            interacaoRelatorioArray.splice(index, 1);
         });
 
     },
