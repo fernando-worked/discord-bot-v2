@@ -6,7 +6,7 @@ import { enviarRelatorio } from "@/functions/relatorio/enviar";
 
 new Component({
     customId: "btn_enviar_relatorio",
-    type: "Button", cache: "cached",
+    type: "Button", cache: "cached", 
     async run(interaction) {
 
         const oldEmbed = interaction.message.embeds[0];

@@ -1,6 +1,6 @@
 import { Component } from "@/discord/base";
 
-let membrosRelatorio: string[] = [];
+export let membrosRelatorio: string[] = [];
 export let valoresSelectUsuarioRelatorio: Map<string, string[]> = new Map();
 
 new Component({
