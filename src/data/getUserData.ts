@@ -1,6 +1,7 @@
 import { getCurrentISO8601Date } from "@/functions/util";
 import { openDb } from "./openDb";
 import { getPatente } from "./getPatente";
+import { getMedalha } from "./getMedalha";
 
 export type UserDataDb = {
     membro?: string,
@@ -37,6 +38,8 @@ export const getUserData = async (memberId: string) :Promise<UserDataDb> => {
     }));
 
     userDataDb.patenteMaxima = await getPatente(userDataDb.totalPontosValidos!);
+    userDataDb.medalhaMaxima = await getMedalha(userDataDb.totalPontos!);
+
 
     db.close();
     return userDataDb;

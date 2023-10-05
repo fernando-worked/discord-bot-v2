@@ -18,8 +18,6 @@ export const atualizarRelatorio = async (messageId: string, avaliadorId: string,
     for (const membro of membros) {
         await db.run("UPDATE relatorio_membros SET pontos = ? WHERE relatorio_message_id = ? AND membro_id = ?", score, messageId, membro);
         const userData = await getUserData(membro);
-        // getMaxRole(pontos atuais)
-        // getUserRole(membro)
         atualizacao.push(userData);
     }
 

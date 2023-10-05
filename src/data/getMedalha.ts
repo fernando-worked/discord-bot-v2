@@ -1,10 +1,10 @@
 import { openDb } from "./openDb";
 
 
-export const getPatente = async (pontos: number) :Promise<number> => {
+export const getMedalha = async (pontos: number) :Promise<number> => {
     const db = await openDb();
 
-    const categoria: string = "PATENTE";
+    const categoria: string = "MEDALHA";
 
     const sql = `
         SELECT cargo_id
