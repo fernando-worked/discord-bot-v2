@@ -1,4 +1,5 @@
 import { Component } from "@/discord/base";
+import { atualizarRelatorio } from "@/functions/relatorio/atualizar";
 import { EmbedBuilder } from "discord.js";
 
 new Component({
@@ -7,6 +8,8 @@ new Component({
     async run(interaction) {
 
         const oldEmbed = interaction.message.embeds[0];
+
+        atualizarRelatorio(oldEmbed.fields[3].value, interaction.user.id, "R");
         
         const embed = new EmbedBuilder()
         .setTitle("Situação do relatório")
@@ -40,7 +43,7 @@ new Component({
             {
                 name: "Membros",
                 value: oldEmbed.fields[2].value,
-                inline: false,
+                inline: true,
             },
             {
                 name: "Relatório",

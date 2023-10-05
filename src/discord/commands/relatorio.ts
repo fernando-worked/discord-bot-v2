@@ -3,7 +3,8 @@ import { ActionRowBuilder, ApplicationCommandOptionType, ApplicationCommandType,
 
 const members: Collection<string, Attachment> = new Collection();
 
-export let interacaoRelatorio: Promise<InteractionResponse<true>>;
+let interacaoRelatorio: Promise<InteractionResponse<true>>;
+export let interacaoRelatorioArray: Promise<InteractionResponse<true>>[];
 
 new Command({
     name: "relatorio",
@@ -76,6 +77,7 @@ new Command({
         const rowBtn = new ActionRowBuilder<ButtonBuilder>({components: [btnAprovar, btnRecusar]});
 
         interacaoRelatorio = interaction.reply({ephemeral: true, embeds: [embed], components: [rowMembrosSlc, rowBtn]});
+        interacaoRelatorioArray.push(interacaoRelatorio);
 
     }
 });

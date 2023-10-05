@@ -1,5 +1,5 @@
 import { Component } from "@/discord/base";
-import { aprovarRelatorio } from "@/functions/relatorio/aprovar";
+import { atualizarRelatorio } from "@/functions/relatorio/atualizar";
 import { EmbedBuilder } from "discord.js";
 
 new Component({
@@ -9,7 +9,7 @@ new Component({
 
         const oldEmbed = interaction.message.embeds[0];
 
-        //aprovarRelatorio(interaction.message.id, interaction.user.id/* forma incorreta, buscar author */, Number(oldEmbed.fields[1].value), interaction.user.id, oldEmbed.fields[2].value.split('\n'));
+        atualizarRelatorio(oldEmbed.fields[3].value, interaction.user.id, "A");
         
         const embed = new EmbedBuilder()
         .setTitle("Situação do relatório")
@@ -28,7 +28,7 @@ new Component({
             {
                 name: "Pontos informados",
                 value: oldEmbed.fields[1].value,
-                inline: false,
+                inline: true,
             },
             {
                 name: "Avaliador",
@@ -43,7 +43,7 @@ new Component({
             {
                 name: "Membros",
                 value: oldEmbed.fields[2].value,
-                inline: false,
+                inline: true,
             },
             {
                 name: "Relatório",

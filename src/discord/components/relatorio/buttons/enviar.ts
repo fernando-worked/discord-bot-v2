@@ -1,5 +1,5 @@
 import { Component } from "@/discord/base";
-import { interacaoRelatorio } from "@/discord/commands/relatorio";
+import { interacaoRelatorio, interacaoRelatorioArray } from "@/discord/commands/relatorio";
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder } from "discord.js";
 import { membrosRelatorio } from "../selects/membros";
 import { enviarRelatorio } from "@/functions/relatorio/enviar";
@@ -9,12 +9,8 @@ new Component({
     type: "Button", cache: "cached",
     async run(interaction) {
 
-        console.log(interaction.message.components[0].data);
-
         const oldEmbed = interaction.message.embeds[0];
 
-        enviarRelatorio(interaction.message.id, interaction.user.id, Number(oldEmbed.fields[0].value), membrosRelatorio);
-        
         const embed = new EmbedBuilder()
         .setTitle("Novo relatório enviado!")
         .setDescription("Confira a situação do relatório abaixo")
@@ -67,9 +63,16 @@ new Component({
 
         const rowBtn = new ActionRowBuilder<ButtonBuilder>({components: [btnAprovar, btnRecusar]});
 
-        interaction.channel?.send({embeds: [embed], components: [rowBtn]});
-        (await interacaoRelatorio).delete();
+        const respostaAtual = await interaction.channel?.send({embeds: [embed], components: [rowBtn]});
 
+        const embedEnviado = respostaAtual?.embeds[0];
+
+        enviarRelatorio(interaction.message.id, interaction.user.id, Number(oldEmbed.fields[0].value), embedEnviado!.fields[2].value.split("\n"));
+
+
+        interacaoRelatorioArray.forEach(async (elemento) => {
+            (await elemento).delete();
+        });
 
     },
 });
