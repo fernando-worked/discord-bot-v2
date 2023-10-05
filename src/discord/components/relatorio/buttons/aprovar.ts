@@ -9,7 +9,7 @@ new Component({
 
         const oldEmbed = interaction.message.embeds[0];
 
-        atualizarRelatorio(oldEmbed.fields[3].value, interaction.user.id, "A");
+        atualizarRelatorio(oldEmbed.fields[3].value, interaction.user.id, "A", oldEmbed.fields[2].value.split("\n"));
         
         const embed = new EmbedBuilder()
         .setTitle("Situação do relatório")
