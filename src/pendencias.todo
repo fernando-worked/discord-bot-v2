@@ -1,3 +1,4 @@
+bug nos membros permancendo selecionados
 implementar parametros(milis envio, milis aprovacao e checksum imagem)
 criar funcao que retorne todos os cargos roleplay (id, nome, pontuacao, categoria) ordenado por pontuacao e categoria
 criar funcao para editar o status (presence) do bot
