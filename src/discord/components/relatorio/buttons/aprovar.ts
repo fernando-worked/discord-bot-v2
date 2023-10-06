@@ -1,7 +1,14 @@
 import { UserDataDb } from "@/data/getUserData";
+import { RoleRow, getAllRoles } from "@/data/getAllRoles";
 import { Component } from "@/discord/base";
 import { atualizarRelatorio } from "@/functions/relatorio/atualizar";
 import { EmbedBuilder } from "discord.js";
+
+type RoleUpdate = {
+    userData?: UserDataDb[],
+    cargos?: RoleRow[],
+
+}
 
 new Component({
     customId: "btn_aprovar_relatorio",
@@ -11,10 +18,49 @@ new Component({
         const oldEmbed = interaction.message.embeds[0];
 
         let userData: UserDataDb[] = [];
-
         userData = await atualizarRelatorio(oldEmbed.fields[3].value, interaction.user.id, "A", oldEmbed.fields[2].value.split("\n"));
+
+        let rolesData: RoleRow[] = [];
+        rolesData = await getAllRoles();
+
+        let roleUpdate: RoleUpdate = {};
+        roleUpdate.userData = userData;
+        roleUpdate.cargos = rolesData;
         
-        console.log(userData);
+        console.log(roleUpdate);
+
+        roleUpdate.userData.forEach(async (membro) => {
+
+            /* Necessário ajustar essas arrays, visto que quando estão nulas está dando erro TypeError: Cannot read properties of undefined (reading 'cargoId') */
+            const patentesElegiveis = roleUpdate.cargos?.filter(cargo => cargo.pontos! <= membro.totalPontosValidos! && cargo.categoria === "PATENTE");
+            const patenteElegivel = patentesElegiveis![patentesElegiveis!.length - 1].cargoId;
+
+            const medalhasElegiveis = roleUpdate.cargos?.filter(cargo => cargo.pontos! <= membro.totalPontos! && cargo.categoria === "MEDALHA");
+            const medalhaElegivel = medalhasElegiveis![medalhasElegiveis!.length - 1].cargoId;
+        
+            const member = await interaction.guild.members.fetch(membro.id!);
+        
+            roleUpdate.cargos?.forEach(async (cargo) =>{
+                // Patentes
+                if(member.roles.cache.has(cargo.cargoId!) && cargo.cargoId != patenteElegivel && cargo.categoria == "PATENTE"){
+                    const role = await interaction.guild.roles.fetch(cargo.cargoId!);
+                    member.roles.remove(role!);
+                }else if (!member.roles.cache.has(patenteElegivel!)){
+                    const role = await interaction.guild.roles.fetch(patenteElegivel!);
+                    member.roles.add(role!);
+                }
+
+                // Medalhas
+                if(member.roles.cache.has(cargo.cargoId!) && cargo.cargoId != medalhaElegivel && cargo.categoria == "MEDALHA"){
+                    const role = await interaction.guild.roles.fetch(cargo.cargoId!);
+                    member.roles.remove(role!);
+                }else if (!member.roles.cache.has(medalhaElegivel!)){
+                    const role = await interaction.guild.roles.fetch(medalhaElegivel!);
+                    member.roles.add(role!);
+                }
+            });
+            
+        });
 
         const embed = new EmbedBuilder()
         .setTitle("Situação do relatório")

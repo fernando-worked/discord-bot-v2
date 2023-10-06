@@ -4,11 +4,9 @@ import { getPatente } from "./getPatente";
 import { getMedalha } from "./getMedalha";
 
 export type UserDataDb = {
-    membro?: string,
+    id?: string,
     totalPontos?: number,
     totalPontosValidos?: number,
-    patenteMaxima?: number,
-    medalhaMaxima?: number,
 }
 
 export const getUserData = async (memberId: string) :Promise<UserDataDb> => {
@@ -32,13 +30,11 @@ export const getUserData = async (memberId: string) :Promise<UserDataDb> => {
     let userDataDb: UserDataDb = {};
 
     result.forEach((row => {
-        userDataDb.membro = row.membro_id;
+        userDataDb.id = row.membro_id;
         userDataDb.totalPontosValidos = row.totalPontosValidos;
         userDataDb.totalPontos = row.totalPontos;
     }));
 
-    userDataDb.patenteMaxima = await getPatente(userDataDb.totalPontosValidos!);
-    userDataDb.medalhaMaxima = await getMedalha(userDataDb.totalPontos!);
 
 
     db.close();
