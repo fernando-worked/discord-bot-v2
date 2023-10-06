@@ -31,32 +31,35 @@ new Component({
 
         roleUpdate.userData.forEach(async (membro) => {
 
-            /* Necessário ajustar essas arrays, visto que quando estão nulas está dando erro TypeError: Cannot read properties of undefined (reading 'cargoId') */
             const patentesElegiveis = roleUpdate.cargos?.filter(cargo => cargo.pontos! <= membro.totalPontosValidos! && cargo.categoria === "PATENTE");
-            const patenteElegivel = patentesElegiveis![patentesElegiveis!.length - 1].cargoId;
+            const patenteElegivel = patentesElegiveis && patentesElegiveis.length > 0 ? patentesElegiveis[patentesElegiveis.length - 1].cargoId : null;
 
             const medalhasElegiveis = roleUpdate.cargos?.filter(cargo => cargo.pontos! <= membro.totalPontos! && cargo.categoria === "MEDALHA");
-            const medalhaElegivel = medalhasElegiveis![medalhasElegiveis!.length - 1].cargoId;
+            const medalhaElegivel = medalhasElegiveis && medalhasElegiveis.length > 0 ? medalhasElegiveis[medalhasElegiveis.length - 1].cargoId : null;
         
             const member = await interaction.guild.members.fetch(membro.id!);
         
             roleUpdate.cargos?.forEach(async (cargo) =>{
                 // Patentes
-                if(member.roles.cache.has(cargo.cargoId!) && cargo.cargoId != patenteElegivel && cargo.categoria == "PATENTE"){
-                    const role = await interaction.guild.roles.fetch(cargo.cargoId!);
-                    member.roles.remove(role!);
-                }else if (!member.roles.cache.has(patenteElegivel!)){
-                    const role = await interaction.guild.roles.fetch(patenteElegivel!);
-                    member.roles.add(role!);
+                if(patenteElegivel){
+                    if(member.roles.cache.has(cargo.cargoId!) && cargo.cargoId != patenteElegivel && cargo.categoria == "PATENTE"){
+                        const role = await interaction.guild.roles.fetch(cargo.cargoId!);
+                        member.roles.remove(role!);
+                    }else if (!member.roles.cache.has(patenteElegivel!)){
+                        const role = await interaction.guild.roles.fetch(patenteElegivel!);
+                        member.roles.add(role!);
+                    }
                 }
 
                 // Medalhas
-                if(member.roles.cache.has(cargo.cargoId!) && cargo.cargoId != medalhaElegivel && cargo.categoria == "MEDALHA"){
-                    const role = await interaction.guild.roles.fetch(cargo.cargoId!);
-                    member.roles.remove(role!);
-                }else if (!member.roles.cache.has(medalhaElegivel!)){
-                    const role = await interaction.guild.roles.fetch(medalhaElegivel!);
-                    member.roles.add(role!);
+                if(medalhaElegivel){
+                    if(member.roles.cache.has(cargo.cargoId!) && cargo.cargoId != medalhaElegivel && cargo.categoria == "MEDALHA"){
+                        const role = await interaction.guild.roles.fetch(cargo.cargoId!);
+                        member.roles.remove(role!);
+                    }else if (!member.roles.cache.has(medalhaElegivel!)){
+                        const role = await interaction.guild.roles.fetch(medalhaElegivel!);
+                        member.roles.add(role!);
+                    }
                 }
             });
             
