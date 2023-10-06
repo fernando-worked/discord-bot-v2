@@ -3,6 +3,8 @@ import { mapInteracaoRelatorio } from "@/discord/commands/relatorio";
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder } from "discord.js";
 import { valoresSelectUsuarioRelatorio } from "../selects/membros";
 import { enviarRelatorio } from "@/functions/relatorio/enviar";
+import { aprovarRelatorio } from "@/functions/relatorio/aprovarRelatorio";
+import { getParametro } from "@/data/parametros";
 
 
 
@@ -70,9 +72,15 @@ new Component({
         enviarRelatorio(interaction.message.id, interaction.user.id, Number(oldEmbed.fields[0].value), embedEnviado!.fields[2].value.split("\n"));
 
         mapInteracaoRelatorio.get(interaction.user.id)!.forEach(async (elemento, index) => {
-            elemento.delete();
+            await elemento.delete();
             mapInteracaoRelatorio.get(interaction.user.id)!.splice(index, 1);
         });
 
+        const pontosLimites = Number(await getParametro("PONTOS_APROVACAO_AUTOMATICA"));
+        if(Number(oldEmbed.fields[0].value) <= pontosLimites){
+            respostaAtual?.delete();
+            aprovarRelatorio(interaction, embedEnviado);
+        }
+        
     },
 });
