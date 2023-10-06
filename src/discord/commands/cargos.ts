@@ -72,9 +72,6 @@ new Command({
         switch(options.getSubcommand()){
         case "set":
 
-             console.log("1");
-
-
             const cargoSet = options.getRole("cargo", true);
             const pontos = options.getInteger("pontos", true);
             const categoria = options.getString("categoria", true);
