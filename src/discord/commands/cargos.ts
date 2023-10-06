@@ -73,7 +73,7 @@ new Command({
         case "set":
 
             const cargoSet = options.getRole("cargo", true);
-            const pontos = options.getInteger("pontos", true);
+            const pontos = options.getInteger("pontos") || 0;
             const categoria = options.getString("categoria", true);
 
             setPontosCargo(cargoSet.id, pontos, categoria);   

@@ -1,0 +1,7 @@
+implementar parametros(milis envio, milis aprovacao e checksum imagem)
+criar funcao que retorne todos os cargos roleplay (id, nome, pontuacao, categoria) ordenado por pontuacao e categoria
+criar funcao para editar o status (presence) do bot
+criar mensagem de boas vindas
+criar dm do bot /mensagem canal|usuario @id @mensagem
+criar selectUser para aplicar o cargo de roleplay
+verificar quais outras funcoes o carlBot executa no servidor e replicar as necessarias

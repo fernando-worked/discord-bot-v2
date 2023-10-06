@@ -23,6 +23,7 @@ new Command({
             name: "pontos",
             description: "Quantidade de pontos que aparecem em baixo da letra na conclusão da missão",
             type: ApplicationCommandOptionType.Integer,
+            minValue: 1,
             required: true,
         },
     ],
