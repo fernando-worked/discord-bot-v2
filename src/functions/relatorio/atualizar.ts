@@ -8,9 +8,12 @@ export const atualizarRelatorio = async (messageId: string, avaliadorId: string,
     const db = await openDb();
     let score = 0;
     let diasValidade = 30;
+    let multiplicadorXP = 1;
 
     if (situacao == "A") {
         score = await getScoreFromMessage(messageId);
+        multiplicadorXP = Number(await getParametro("MULTIPLICADOR_XP_BASE", multiplicadorXP));
+        score = score * multiplicadorXP;
         diasValidade = Number(await getParametro("DIAS_VENCIMENTO_PONTOS", diasValidade));
     }
 

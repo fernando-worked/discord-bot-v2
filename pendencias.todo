@@ -1,0 +1,19 @@
+criar funcao que retorne todos os cargos roleplay (id, nome, pontuacao, categoria) ordenado por pontuacao e categoria
+criar funcao que retorne todos os membros que possuem ponto, sua patente atual, quantos pontos validos e totais
+criar funcao para editar o status (presence) do bot
+criar mensagem de boas vindas
+criar dm do bot /mensagem canal|usuario @id @mensagem
+criar selectUser para aplicar o cargo de roleplay
+implementar botão cancelar do enviar relatorio
+verificar permissões de todos os comandos
+verificar quais outras funcoes o carlBot executa no servidor e replicar as necessarias
+
+
+/*
+    DIAS_VENCIMENTO_PONTOS - Qual a validade dos pontos em dias, a partir da avaliação (INTEGER)
+    PONTOS_APROVACAO_AUTOMATICA - Qual o máximo de pontos que deve ter um relatório para ser automaticamente aprovado (INTEGER)
+    MILISSEGUNDOS_AGUARDAR_ENVIO - Quanto tempo o usuário deve aguardar até conseguir enviar um novo relatório (INTEGER)
+    CHECK_CHECKSUM_IMAGEM - Indicativo se o sistema deve bloquear ou não imagens repetidas (0 = não, 1 = sim) (BOOL)
+    MILISSEGUNDOS_APROVACAO_AUTOMATICA - Quanto tempo deve ter passado da última aprovação daquele usuário para que novos relatórios sejam automaticamente aprovados (INTEGER)
+    MULTIPLICADOR_XP_BASE - Multiplicador de XP usado para multiplicar o score (Valor padrão = 1) (Double separado por vírgula)
+*/

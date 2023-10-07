@@ -5,6 +5,9 @@ import { valoresSelectUsuarioRelatorio } from "../selects/membros";
 import { enviarRelatorio } from "@/functions/relatorio/enviar";
 import { aprovarRelatorio } from "@/functions/relatorio/aprovarRelatorio";
 import { getParametro } from "@/data/parametros";
+import { getDtUltAvaliacao, getDtUltEnvio } from "@/data/getDatas";
+import { getCheckSumImage, getCurrentISO8601Date } from "@/functions/util";
+import { getCountCheckSum } from "@/data/getCountCheckSum";
 
 
 
@@ -14,6 +17,39 @@ new Component({
     async run(interaction) {
 
         const oldEmbed = interaction.message.embeds[0];
+
+        const imageUrl = interaction.message.embeds[0].image?.url;
+        let imageCheckSum: string = "";
+
+        if(imageUrl){
+            imageCheckSum = await getCheckSumImage(imageUrl);
+            console.log(`checksum ${imageCheckSum}`);
+        }
+
+        const totalCheckSum = await getCountCheckSum(imageCheckSum);
+        const controlaChecksum = Number(await getParametro("CHECK_CHECKSUM_IMAGEM",0));
+        if(totalCheckSum > 0 && controlaChecksum == 1){
+            return interaction.reply({ephemeral: true, content: "Essa imagem já foi enviada anteriormente."});
+        }
+
+        const dtUltEnvioISO = await getDtUltEnvio(interaction.user.id);
+        const dtUltAvaliacaoISO = await getDtUltAvaliacao(interaction.user.id);
+
+        const dtUltEnvio = new Date(dtUltEnvioISO);
+        const dtUltAvaliacao = new Date(dtUltAvaliacaoISO);
+
+        const dtAtual = new Date(getCurrentISO8601Date());
+
+        const diferencaEmMilissegundosEnvio = Math.abs(dtAtual.getTime() - dtUltEnvio.getTime());
+        const diferencaEmMilissegundosAvaliacao = Math.abs(dtAtual.getTime() - dtUltAvaliacao.getTime());
+
+        const parametroMilisEnvio = Number(await getParametro("MILISSEGUNDOS_AGUARDAR_ENVIO"));
+        const parametroMilisAprovacao = Number(await getParametro("MILISSEGUNDOS_APROVACAO_AUTOMATICA"));
+
+        if(diferencaEmMilissegundosEnvio < parametroMilisEnvio){
+            return interaction.reply({ephemeral: true, content: "Você não pode enviar um novo relatório agora. Tente novamente mais tarde."});
+        }
+
 
         const embed = new EmbedBuilder()
         .setTitle("Novo relatório enviado!")
@@ -69,15 +105,18 @@ new Component({
 
         const embedEnviado = respostaAtual?.embeds[0];
 
-        enviarRelatorio(interaction.message.id, interaction.user.id, Number(oldEmbed.fields[0].value), embedEnviado!.fields[2].value.split("\n"));
+        enviarRelatorio(interaction.message.id, interaction.user.id, Number(oldEmbed.fields[0].value), embedEnviado!.fields[2].value.split("\n"), imageCheckSum);
 
         mapInteracaoRelatorio.get(interaction.user.id)!.forEach(async (elemento, index) => {
-            await elemento.delete();
+            elemento.delete();
             mapInteracaoRelatorio.get(interaction.user.id)!.splice(index, 1);
         });
 
+        valoresSelectUsuarioRelatorio.delete(interaction.user.id);
+
+
         const pontosLimites = Number(await getParametro("PONTOS_APROVACAO_AUTOMATICA"));
-        if(Number(oldEmbed.fields[0].value) <= pontosLimites){
+        if(Number(oldEmbed.fields[0].value) <= pontosLimites && diferencaEmMilissegundosAvaliacao >= parametroMilisAprovacao){
             respostaAtual?.delete();
             aprovarRelatorio(interaction, embedEnviado);
         }

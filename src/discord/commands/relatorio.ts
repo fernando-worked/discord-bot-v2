@@ -1,8 +1,6 @@
 import { Command } from "@/discord/base";
 import { ActionRowBuilder, ApplicationCommandOptionType, ApplicationCommandType, Attachment, ButtonBuilder, ButtonStyle, Collection, ComponentType, EmbedBuilder, InteractionResponse, ModalBuilder, TextInputBuilder, TextInputStyle, UserSelectMenuBuilder, codeBlock } from "discord.js";
 
-const members: Collection<string, Attachment> = new Collection();
-
 let interacaoRelatorio: InteractionResponse<true>;
 let interacaoRelatorioArray: InteractionResponse<true>[] = [];
 export let mapInteracaoRelatorio: Map<string, InteractionResponse<true>[]> = new Map();
@@ -32,6 +30,7 @@ new Command({
 
         const image = options.getAttachment("imagem", true);
         const pontos = options.getInteger("pontos", true);
+        
 
         const embed = new EmbedBuilder()
         .setTitle("Novo relatório de missão")
@@ -41,11 +40,11 @@ new Command({
             name: interaction.user.displayName,
             iconURL: interaction.user.avatarURL() || undefined
         })
-        .setFields(
+        .setFields([
         {
             name: "Pontos informados pelo usuário",
             value: pontos.toString(),
-        })
+        },])
         .setTimestamp()
         .setFooter({text: "⏳ Relatório pendente"})
         .setImage(image.url);

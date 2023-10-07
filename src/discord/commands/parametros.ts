@@ -28,7 +28,7 @@ import { getAll, setParametro } from "@/data/parametros";
                     {
                         name: "valor",
                         description: "Novo valor",
-                        type: ApplicationCommandOptionType.Integer,
+                        type: ApplicationCommandOptionType.Number,
                         required: true,
                     },
                 ],
@@ -40,7 +40,7 @@ import { getAll, setParametro } from "@/data/parametros";
             switch (options.getSubcommand()) {
                 case "set":
                     const chave = options.getString("chave", true);
-                    const valor = options.getInteger("valor", true);
+                    const valor = options.getNumber("valor", true);
 
                     setParametro(chave, valor.toString());
 
