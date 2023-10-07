@@ -3,11 +3,11 @@ criar funcao que retorne todos os membros que possuem ponto, sua patente atual, 
 criar funcao para editar o status (presence) do bot
 criar mensagem de boas vindas
 criar dm do bot /mensagem canal|usuario @id @mensagem
-criar selectUser para aplicar o cargo de roleplay
+criar selectUser para aplicar o cargo de CQB
 implementar botão cancelar do enviar relatorio
 verificar permissões de todos os comandos
 verificar quais outras funcoes o carlBot executa no servidor e replicar as necessarias
-
+criar comando /convite
 
 /*
     DIAS_VENCIMENTO_PONTOS - Qual a validade dos pontos em dias, a partir da avaliação (INTEGER)
