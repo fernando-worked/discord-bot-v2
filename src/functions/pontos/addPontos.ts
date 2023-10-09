@@ -1,5 +1,5 @@
 import { getCurrentISO8601Date } from "../util";
-import { openDb } from "./../../data/openDb";
+import { openDb } from "../../data/openDb";
 
 export const addPontos = async (responsavel: string[], membros: string[], tipo: string[], tags: string[]) =>{
     const db = await openDb();

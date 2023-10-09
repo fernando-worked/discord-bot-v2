@@ -12,6 +12,7 @@ import { getAll, setParametro } from "@/data/parametros";
         dmPermission,
         description: "Configuração de parâmetros",
         type: ApplicationCommandType.ChatInput,
+        defaultMemberPermissions: ["Administrator"],
         options: [
             {
                 name: "set",

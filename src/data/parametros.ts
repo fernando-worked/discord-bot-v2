@@ -3,6 +3,7 @@ import { openDb } from "./openDb";
 
 export const getParametro = async (chave: string, defaultValue?: any) :Promise<string> => {
     const db = await openDb();
+    
 
     const sql = `
         SELECT valor
@@ -16,18 +17,25 @@ export const getParametro = async (chave: string, defaultValue?: any) :Promise<s
     return result[0] ? result[0].valor : defaultValue;
 };
 
+
 export const setParametro = async (chave: string, valor: string)=> {
     const db = await openDb();
+    let sql;
 
-    const sql = `
-        update PARAMETROS set valor = ?
-        where chave = ?
-    `;
+    sql = "select valor from parametros where chave = ?";
+    const result = await db.all(sql, [chave]);
 
-    const result = await db.all(sql, [valor, chave]);
+    if(result.length == 0){
+        sql = "INSERT into parametros (chave, valor) values (?,?)";
+        await db.all(sql, [chave, valor]);
+    }else{
+        sql = "UPDATE parametros set valor = ? where chave = ?";
+        await db.all(sql, [valor, chave]);
+    }
 
     db.close();
 };
+
 
 export const getAll = async ()=> {
 

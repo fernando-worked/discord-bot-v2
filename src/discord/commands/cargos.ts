@@ -11,6 +11,7 @@ new Command({
     name: "cargos", dmPermission,
     description: "Sistema de pontuação do servidor",
     type: ApplicationCommandType.ChatInput,
+    defaultMemberPermissions: ["Administrator"],
     options:[
         {
             name: "set",
@@ -94,7 +95,7 @@ new Command({
 
             resetCargos();
 
-            interaction.reply({ephemeral: true, content: "Todos os cargos roleplay foram removidos de seus usuários!"});
+            interaction.reply({ephemeral: true, content: "Todos os cargos roleplay estão em processo de remoção de seus membros!"});
 
         break;
         }
