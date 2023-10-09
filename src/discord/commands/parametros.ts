@@ -18,6 +18,7 @@ import { getAll, setParametro } from "@/data/parametros";
                 name: "set",
                 description: "Atualiza o valor de um parâmetro",
                 type: ApplicationCommandOptionType.Subcommand,
+                
                 options: [
                     {
                         name: "chave",
