@@ -8,6 +8,7 @@ implementar botão cancelar do enviar relatorio
 verificar permissões de todos os comandos
 verificar quais outras funcoes o carlBot executa no servidor e replicar as necessarias
 criar comando /convite
+criar rotina para ser executada uma vez por dia verificando os pontos e atribuindo cargos
 
 /*
     DIAS_VENCIMENTO_PONTOS - Qual a validade dos pontos em dias, a partir da avaliação (INTEGER)
