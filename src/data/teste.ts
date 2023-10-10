@@ -17,29 +17,30 @@ export const teste = async (nome?: string) => {
 };
 
 const configParametros = (result: any) => {
-    if(result === undefined){
-        type Parametro = {
-            chave: string,
-            valor: string,
-        }
-
-        let parametros: Parametro[] = [];
-
-        parametros.push({chave: "DIAS_VENCIMENTO_PONTOS", valor: "30"});
-        parametros.push({chave: "PONTOS_APROVACAO_AUTOMATICA", valor: "2000"});
-        parametros.push({chave: "MILISSEGUNDOS_AGUARDAR_ENVIO", valor: "0"});
-        parametros.push({chave: "CHECK_CHECKSUM_IMAGEM", valor: "1"});
-        parametros.push({chave: "MILISSEGUNDOS_APROVACAO_AUTOMATICA", valor: "0"});
-        parametros.push({chave: "MULTIPLICADOR_XP_BASE", valor: "1"});
-
-        parametros.forEach((parametro) =>{
-            setParametro(parametro.chave, parametro.valor);
-        });
-        
+    console.log("executado configuracao de parametros");
+    type Parametro = {
+        chave: string,
+        valor: string,
     }
+
+    let parametros: Parametro[] = [];
+
+    parametros.push({chave: "DIAS_VENCIMENTO_PONTOS", valor: "30"});
+    parametros.push({chave: "PONTOS_APROVACAO_AUTOMATICA", valor: "2000"});
+    parametros.push({chave: "MILISSEGUNDOS_AGUARDAR_ENVIO", valor: "0"});
+    parametros.push({chave: "CHECK_CHECKSUM_IMAGEM", valor: "1"});
+    parametros.push({chave: "MILISSEGUNDOS_APROVACAO_AUTOMATICA", valor: "0"});
+    parametros.push({chave: "MULTIPLICADOR_XP_BASE", valor: "1"});
+
+    parametros.forEach((parametro) =>{
+        setParametro(parametro.chave, parametro.valor);
+    });
+        
 };
 
 const configCargos = (result: any) =>{
+
+    console.log("executado configuracao de cargos");
 
     enum Cargos {
         /* PATENTES */
