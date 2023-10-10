@@ -37,25 +37,22 @@ export const aprovarRelatorio = (async (interaction: ButtonInteraction<"cached">
     
         roleUpdate.cargos?.forEach(async (cargo) =>{
             // Patentes
-            if(patenteElegivel){
-                if(member.roles.cache.has(cargo.cargoId!) && cargo.cargoId != patenteElegivel && cargo.categoria == "PATENTE"){
-                    const role = await interaction.guild.roles.fetch(cargo.cargoId!);
-                    member.roles.remove(role!);
-                }else if (!member.roles.cache.has(patenteElegivel!)){
-                    const role = await interaction.guild.roles.fetch(patenteElegivel!);
-                    member.roles.add(role!);
-                }
+            if(member.roles.cache.has(cargo.cargoId!) && (cargo.cargoId != patenteElegivel || !patenteElegivel ) && cargo.categoria == "PATENTE"){
+                const role = await interaction.guild.roles.fetch(cargo.cargoId!);
+                member.roles.remove(role!);
+            }else if (!member.roles.cache.has(patenteElegivel!) && patenteElegivel){
+                const role = await interaction.guild.roles.fetch(patenteElegivel!);
+                member.roles.add(role!);
             }
+            
 
             // Medalhas
-            if(medalhaElegivel){
-                if(member.roles.cache.has(cargo.cargoId!) && cargo.cargoId != medalhaElegivel && cargo.categoria == "MEDALHA"){
-                    const role = await interaction.guild.roles.fetch(cargo.cargoId!);
-                    member.roles.remove(role!);
-                }else if (!member.roles.cache.has(medalhaElegivel!)){
-                    const role = await interaction.guild.roles.fetch(medalhaElegivel!);
-                    member.roles.add(role!);
-                }
+            if(member.roles.cache.has(cargo.cargoId!) && (cargo.cargoId != medalhaElegivel || !medalhaElegivel) && cargo.categoria == "MEDALHA"){
+                const role = await interaction.guild.roles.fetch(cargo.cargoId!);
+                member.roles.remove(role!);
+            }else if (!member.roles.cache.has(medalhaElegivel!) && medalhaElegivel){
+                const role = await interaction.guild.roles.fetch(medalhaElegivel!);
+                member.roles.add(role!);
             }
         });
         
