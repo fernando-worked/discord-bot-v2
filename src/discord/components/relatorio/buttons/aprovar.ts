@@ -1,8 +1,4 @@
-import { UserDataDb } from "@/data/getUserData";
-import { RoleRow, getAllRoles } from "@/data/getAllRoles";
 import { Component } from "@/discord/base";
-import { atualizarRelatorio } from "@/functions/relatorio/atualizar";
-import { EmbedBuilder } from "discord.js";
 import { aprovarRelatorio } from "@/functions/relatorio/aprovarRelatorio";
 
 
