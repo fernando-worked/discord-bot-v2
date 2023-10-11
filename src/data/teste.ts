@@ -2,8 +2,6 @@ import { setPontosCargo } from "@/functions/cargos/set";
 import { openDb } from "./openDb";
 import { setParametro } from "./parametros";
 
-
-
 export const teste = async (nome?: string) => {
     const db = await openDb();
     await db.exec("CREATE TABLE if not exists relatorio (message_id TEXT, author_id TEXT, score_informado NUMBER, situacao TEXT, avaliador_id TEXT, data_envio TEXT, data_avaliacao TEXT, data_validade TEXT, img_checksum TEXT)");
@@ -14,6 +12,7 @@ export const teste = async (nome?: string) => {
     const resultCreateParametros = await db.exec("CREATE TABLE if not exists parametros (chave TEXT, valor TEXT)");
     configParametros(resultCreateParametros);
     db.close();
+
 };
 
 const configParametros = (result: any) => {

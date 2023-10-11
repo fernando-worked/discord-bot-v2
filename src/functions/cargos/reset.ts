@@ -1,4 +1,4 @@
-import { meuBot as cliente } from "@/discord/events/example";
+import { meuBot as cliente } from "@/discord/events/onReady";
 import { openDb } from "../../data/openDb";
 
 export const resetCargos = async () =>{
