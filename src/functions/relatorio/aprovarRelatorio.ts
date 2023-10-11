@@ -2,8 +2,9 @@ import { UserDataDb } from "@/data/getUserData";
 import { RoleRow, getAllRoles } from "@/data/getAllRoles";
 import { atualizarRelatorio } from "@/functions/relatorio/atualizar";
 import { ButtonInteraction, Embed, EmbedBuilder } from "discord.js";
+import { manipulaCargos } from "../manipulaCargos";
 
-type RoleUpdate = {
+export type RoleUpdate = {
     userData?: UserDataDb[],
     cargos?: RoleRow[],
 
@@ -25,38 +26,7 @@ export const aprovarRelatorio = (async (interaction: ButtonInteraction<"cached">
     
     console.log(roleUpdate);
 
-    roleUpdate.userData.forEach(async (membro) => {
-
-        const patentesElegiveis = roleUpdate.cargos?.filter(cargo => cargo.pontos! <= membro.totalPontosValidos! && cargo.categoria === "PATENTE");
-        const patenteElegivel = patentesElegiveis && patentesElegiveis.length > 0 ? patentesElegiveis[patentesElegiveis.length - 1].cargoId : null;
-
-        const medalhasElegiveis = roleUpdate.cargos?.filter(cargo => cargo.pontos! <= membro.totalPontos! && cargo.categoria === "MEDALHA");
-        const medalhaElegivel = medalhasElegiveis && medalhasElegiveis.length > 0 ? medalhasElegiveis[medalhasElegiveis.length - 1].cargoId : null;
-    
-        const member = await interaction.guild.members.fetch(membro.id!);
-    
-        roleUpdate.cargos?.forEach(async (cargo) =>{
-            // Patentes
-            if(member.roles.cache.has(cargo.cargoId!) && (cargo.cargoId != patenteElegivel || !patenteElegivel ) && cargo.categoria == "PATENTE"){
-                const role = await interaction.guild.roles.fetch(cargo.cargoId!);
-                member.roles.remove(role!);
-            }else if (!member.roles.cache.has(patenteElegivel!) && patenteElegivel){
-                const role = await interaction.guild.roles.fetch(patenteElegivel!);
-                member.roles.add(role!);
-            }
-            
-
-            // Medalhas
-            if(member.roles.cache.has(cargo.cargoId!) && (cargo.cargoId != medalhaElegivel || !medalhaElegivel) && cargo.categoria == "MEDALHA"){
-                const role = await interaction.guild.roles.fetch(cargo.cargoId!);
-                member.roles.remove(role!);
-            }else if (!member.roles.cache.has(medalhaElegivel!) && medalhaElegivel){
-                const role = await interaction.guild.roles.fetch(medalhaElegivel!);
-                member.roles.add(role!);
-            }
-        });
-        
-    });
+    await manipulaCargos(roleUpdate);
 
     const embed = new EmbedBuilder()
     .setTitle("Situação do relatório")
