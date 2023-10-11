@@ -1,13 +1,12 @@
 criar funcao que retorne todos os cargos roleplay (id, nome, pontuacao, categoria) ordenado por pontuacao e categoria
 criar funcao que retorne todos os membros que possuem ponto, sua patente atual, quantos pontos validos e totais
-criar funcao para editar o status (presence) do bot
+criar comando /status para retornar os dados atual de um jogador (lista de patentes e patente atual)
 criar mensagem de boas vindas
-criar dm do bot /mensagem canal|usuario @id @mensagem
 criar selectUser para aplicar o cargo de CQB
-implementar botão cancelar do enviar relatorio
-verificar permissões de todos os comandos
 verificar quais outras funcoes o carlBot executa no servidor e replicar as necessarias
 criar comando /convite
+criar rotina para apagar o relatorio_membros no evento onLeave
+
 
 /*
     DIAS_VENCIMENTO_PONTOS - Qual a validade dos pontos em dias, a partir da avaliação (INTEGER)

@@ -7,7 +7,7 @@ export type UserDataDb = {
     totalPontosValidos?: number,
 }
 
-export const getUserData = async (memberId: string) :Promise<UserDataDb> => {
+export const getAllMembersReports = async () :Promise<UserDataDb[]> => {
     const db = await openDb();
 
     const sql = `
@@ -19,20 +19,18 @@ export const getUserData = async (memberId: string) :Promise<UserDataDb> => {
         END) as totalPontosValidos,
         SUM(pontos) as totalPontos
         FROM relatorio_membros rm, relatorio r
-        WHERE rm.membro_id = ? and rm.relatorio_message_id = r.message_id
+        WHERE rm.relatorio_message_id = r.message_id
         group by membro_id
     `;
 
-    const result = await db.all(sql, [getCurrentISO8601Date(), memberId]);
+    const result = await db.all(sql, [getCurrentISO8601Date()]);
 
-    let userDataDb: UserDataDb = {};
+    let userDataDb: UserDataDb[] = [];
 
     result.forEach((row => {
-        userDataDb.id = row.membro_id;
-        userDataDb.totalPontosValidos = row.totalPontosValidos;
-        userDataDb.totalPontos = row.totalPontos;
-    }));
 
+        userDataDb.push({id: row.membro_id, totalPontosValidos: row.totalPontosValidos, totalPontos: row.totalPontos});
+    }));
 
 
     db.close();

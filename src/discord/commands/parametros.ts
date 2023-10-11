@@ -1,4 +1,4 @@
-import { ActionRowBuilder, ApplicationCommandOptionType, ApplicationCommandType, ButtonBuilder, ButtonStyle, ChatInputCommandInteraction, ComponentType, InteractionResponse, ModalBuilder, StringSelectMenuBuilder, UserSelectMenuBuilder } from "discord.js";
+import { ApplicationCommandOptionType, ApplicationCommandType, ButtonBuilder, ButtonStyle, ChatInputCommandInteraction, ComponentType, InteractionResponse, ModalBuilder, StringSelectMenuBuilder, UserSelectMenuBuilder } from "discord.js";
 import { Command } from "../base";
 import { getAll, setParametro } from "@/data/parametros";
 
@@ -12,11 +12,13 @@ import { getAll, setParametro } from "@/data/parametros";
         dmPermission,
         description: "Configuração de parâmetros",
         type: ApplicationCommandType.ChatInput,
+        defaultMemberPermissions: ["Administrator"],
         options: [
             {
                 name: "set",
                 description: "Atualiza o valor de um parâmetro",
                 type: ApplicationCommandOptionType.Subcommand,
+                
                 options: [
                     {
                         name: "chave",

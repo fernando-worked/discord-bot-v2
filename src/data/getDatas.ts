@@ -1,4 +1,3 @@
-import { getCurrentISO8601Date } from "@/functions/util";
 import { openDb } from "./openDb";
 
 export type UserDataDb = {
