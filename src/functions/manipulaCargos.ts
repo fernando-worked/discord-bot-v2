@@ -18,27 +18,46 @@ export const manipulaCargos = async (roleUpdate: RoleUpdate) =>{
     
         const member = await guild.members.fetch(membro.id!);
     
-        roleUpdate.cargos?.filter(cargo => cargo.categoria = "PATENTE").forEach(async (cargo) =>{
+        
+        roleUpdate.cargos?.filter(cargo => cargo.categoria == "PATENTE").forEach(async (cargo) =>{
             // Patentes
             if((member.roles.cache.has(cargo.cargoId!) && (cargo.cargoId != patenteElegivel || !patenteElegivel)) || typeof patenteElegivel == "undefined"){
+                
+                console.log(`patente remover\ncargoId: ${cargo.cargoId}\npatenteElegivel: ${patenteElegivel}`);
+                
                 const role = await guild.roles.fetch(cargo.cargoId!);
                 member.roles.remove(role!);
-            }else if (!member.roles.cache.has(patenteElegivel!) && patenteElegivel){
+            } 
+
+            if (!member.roles.cache.has(patenteElegivel!) && patenteElegivel == cargo.cargoId){
+
+                console.log(`patente adicionar\ncargoId: ${cargo.cargoId}\npatenteElegivel: ${patenteElegivel}`);
+
                 const role = await guild.roles.fetch(patenteElegivel!);
                 member.roles.add(role!);
             }
         });
-
-        roleUpdate.cargos?.filter(cargo => cargo.categoria = "MEDALHA").forEach(async (cargo) =>{
+        
+        
+        roleUpdate.cargos?.filter(cargo => cargo.categoria == "MEDALHA").forEach(async (cargo) =>{
             // Medalhas
             if((member.roles.cache.has(cargo.cargoId!) && (cargo.cargoId != medalhaElegivel || !medalhaElegivel)) || typeof medalhaElegivel == "undefined"){
+                
+                console.log(`medalha remover\ncargoId: ${cargo.cargoId}\nmedalhaElegivel: ${medalhaElegivel}`);
+                
                 const role = await guild.roles.fetch(cargo.cargoId!);
                 member.roles.remove(role!);
-            }else if (!member.roles.cache.has(medalhaElegivel!) && medalhaElegivel){
+            }
+            
+            if (!member.roles.cache.has(medalhaElegivel!) && medalhaElegivel == cargo.cargoId){
+
+                console.log(`medalha adicionar\ncargoId: ${cargo.cargoId}\nmedalhaElegivel: ${medalhaElegivel}`);
+
                 const role = await guild.roles.fetch(medalhaElegivel!);
                 member.roles.add(role!);
             }
         });
+        
         
     });
 };

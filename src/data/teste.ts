@@ -27,9 +27,9 @@ const configParametros = (result: any) => {
 
     parametros.push({chave: "DIAS_VENCIMENTO_PONTOS", valor: getTempo({dias: 30, output: "dias"})});
     parametros.push({chave: "PONTOS_APROVACAO_AUTOMATICA", valor: "2000"});
-    parametros.push({chave: "MILISSEGUNDOS_AGUARDAR_ENVIO", valor: getTempo({minutos: 1})});
+    parametros.push({chave: "MILISSEGUNDOS_AGUARDAR_ENVIO", valor: getTempo({milissegundos: 1})});
     parametros.push({chave: "CHECK_CHECKSUM_IMAGEM", valor: "0"});
-    parametros.push({chave: "MILISSEGUNDOS_APROVACAO_AUTOMATICA", valor: getTempo({minutos: 5})});
+    parametros.push({chave: "MILISSEGUNDOS_APROVACAO_AUTOMATICA", valor: getTempo({milissegundos: 1})});
     parametros.push({chave: "MULTIPLICADOR_XP_BASE", valor: "1"});
 
     parametros.forEach((parametro) =>{
