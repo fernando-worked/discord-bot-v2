@@ -21,7 +21,6 @@ export function getCurrentISO8601Date(dias: number = 0): string {
     return isoString;
 }
 
-
 export async function getCheckSumImage(imageUrl: string) {
     try {
 
@@ -36,5 +35,37 @@ export async function getCheckSumImage(imageUrl: string) {
     } catch (error) {
         console.error("Erro ao calcular o checksum da imagem:", error);
         throw error;
+    }
+}
+
+interface Tempo {
+    dias?: number;
+    horas?: number;
+    minutos?: number;
+    segundos?: number;
+    milissegundos?: number;
+    output?: "dias" | "horas" | "minutos" | "segundos" | "milissegundos";
+}
+
+export function getTempo({ dias = 0, horas = 0, minutos = 0, segundos = 0, milissegundos = 0, output = "milissegundos" }: Tempo): number {
+    const milissegundosPorDia = dias * 24 * 60 * 60 * 1000;
+    const milissegundosPorHora = horas * 60 * 60 * 1000;
+    const milissegundosPorMinuto = minutos * 60 * 1000;
+    const milissegundosPorSegundo = segundos * 1000;
+
+    const tempoTotalEmMilissegundos = milissegundosPorDia + milissegundosPorHora + milissegundosPorMinuto + milissegundosPorSegundo + milissegundos;
+
+    switch (output) {
+        case "dias":
+            return tempoTotalEmMilissegundos / (24 * 60 * 60 * 1000);
+        case "horas":
+            return tempoTotalEmMilissegundos / (60 * 60 * 1000);
+        case "minutos":
+            return tempoTotalEmMilissegundos / (60 * 1000);
+        case "segundos":
+            return tempoTotalEmMilissegundos / 1000;
+        case "milissegundos":
+        default:
+            return tempoTotalEmMilissegundos;
     }
 }

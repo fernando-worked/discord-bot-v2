@@ -18,19 +18,20 @@ export const manipulaCargos = async (roleUpdate: RoleUpdate) =>{
     
         const member = await guild.members.fetch(membro.id!);
     
-        roleUpdate.cargos?.forEach(async (cargo) =>{
+        roleUpdate.cargos?.filter(cargo => cargo.categoria = "PATENTE").forEach(async (cargo) =>{
             // Patentes
-            if(member.roles.cache.has(cargo.cargoId!) && (cargo.cargoId != patenteElegivel || !patenteElegivel ) && cargo.categoria == "PATENTE"){
+            if((member.roles.cache.has(cargo.cargoId!) && (cargo.cargoId != patenteElegivel || !patenteElegivel)) || typeof patenteElegivel == "undefined"){
                 const role = await guild.roles.fetch(cargo.cargoId!);
                 member.roles.remove(role!);
             }else if (!member.roles.cache.has(patenteElegivel!) && patenteElegivel){
                 const role = await guild.roles.fetch(patenteElegivel!);
                 member.roles.add(role!);
             }
-            
+        });
 
+        roleUpdate.cargos?.filter(cargo => cargo.categoria = "MEDALHA").forEach(async (cargo) =>{
             // Medalhas
-            if(member.roles.cache.has(cargo.cargoId!) && (cargo.cargoId != medalhaElegivel || !medalhaElegivel) && cargo.categoria == "MEDALHA"){
+            if((member.roles.cache.has(cargo.cargoId!) && (cargo.cargoId != medalhaElegivel || !medalhaElegivel)) || typeof medalhaElegivel == "undefined"){
                 const role = await guild.roles.fetch(cargo.cargoId!);
                 member.roles.remove(role!);
             }else if (!member.roles.cache.has(medalhaElegivel!) && medalhaElegivel){

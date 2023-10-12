@@ -1,6 +1,7 @@
 import { setPontosCargo } from "@/functions/cargos/set";
 import { openDb } from "./openDb";
 import { setParametro } from "./parametros";
+import { getTempo } from "@/functions/util";
 
 export const configDB = async () => {
     const db = await openDb();
@@ -19,16 +20,16 @@ const configParametros = (result: any) => {
     console.log("executado configuracao de parametros");
     type Parametro = {
         chave: string,
-        valor: string,
+        valor: string | number,
     }
 
     let parametros: Parametro[] = [];
 
-    parametros.push({chave: "DIAS_VENCIMENTO_PONTOS", valor: "30"});
+    parametros.push({chave: "DIAS_VENCIMENTO_PONTOS", valor: getTempo({dias: 30, output: "dias"})});
     parametros.push({chave: "PONTOS_APROVACAO_AUTOMATICA", valor: "2000"});
-    parametros.push({chave: "MILISSEGUNDOS_AGUARDAR_ENVIO", valor: "0"});
-    parametros.push({chave: "CHECK_CHECKSUM_IMAGEM", valor: "1"});
-    parametros.push({chave: "MILISSEGUNDOS_APROVACAO_AUTOMATICA", valor: "0"});
+    parametros.push({chave: "MILISSEGUNDOS_AGUARDAR_ENVIO", valor: getTempo({minutos: 1})});
+    parametros.push({chave: "CHECK_CHECKSUM_IMAGEM", valor: "0"});
+    parametros.push({chave: "MILISSEGUNDOS_APROVACAO_AUTOMATICA", valor: getTempo({minutos: 5})});
     parametros.push({chave: "MULTIPLICADOR_XP_BASE", valor: "1"});
 
     parametros.forEach((parametro) =>{

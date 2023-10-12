@@ -18,7 +18,7 @@ export const getParametro = async (chave: string, defaultValue?: any) :Promise<s
 };
 
 
-export const setParametro = async (chave: string, valor: string)=> {
+export const setParametro = async (chave: string, valor: string | number)=> {
     const db = await openDb();
     let sql;
 

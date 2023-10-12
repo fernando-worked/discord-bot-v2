@@ -30,14 +30,14 @@ new Command({
             descricao = descricao + "\nPATENTES MILITARES (apenas pontos não-vencidos)\n";
             roleUpdate.cargos?.filter(cargo => cargo.categoria === "PATENTE").forEach(async (cargo) =>{
 
-                descricao = descricao +`${membro.totalPontosValidos! < cargo.pontos! ? "🔴" : "🟢"} <@&${cargo.cargoId}> (${cargo.pontos} pts)\n`;
+                descricao = descricao +`${membro.totalPontosValidos! >= cargo.pontos! ? "🟢" : "🔴"} <@&${cargo.cargoId}> (${cargo.pontos} pts)\n`;
 
             });
 
             descricao = descricao + "\nMEDALHAS DE CONDECORAÇÃO (total de pontos do operador)\n";
             roleUpdate.cargos?.filter(cargo => cargo.categoria === "MEDALHA").forEach(async (cargo) =>{
 
-                descricao = descricao +`${membro.totalPontos! < cargo.pontos! ? "🔴" : "🟢"} <@&${cargo.cargoId}> (${cargo.pontos} pts)\n`;
+                descricao = descricao +`${membro.totalPontos! >= cargo.pontos! ? "🟢" : "🔴"} <@&${cargo.cargoId}> (${cargo.pontos} pts)\n`;
 
             });
             
@@ -48,8 +48,8 @@ new Command({
         .setTitle("Confira a sua pontuação e patentes abaixo")
         .setDescription(descricao)
         .setFields([
-            {name: "Pontos válidos", value: `${roleUpdate.userData[0].totalPontosValidos}`, inline: true},
-            {name: "Pontos totais", value: `${roleUpdate.userData[0].totalPontos}`, inline: true}
+            {name: "Pontos válidos", value: `${typeof roleUpdate.userData[0].totalPontosValidos != "undefined" ? roleUpdate.userData[0].totalPontosValidos : "Não há"}`, inline: true},
+            {name: "Pontos totais", value: `${typeof roleUpdate.userData[0].totalPontos != "undefined" ? roleUpdate.userData[0].totalPontos : "Não há"}`, inline: true}
         ])
         .setFooter({text: "Informe seus relatórios através do comando /relatorio para aumentar seus pontos!"});
 
