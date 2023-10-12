@@ -72,7 +72,7 @@ new Component({
             },
             {
                 name: "Membros",
-                value: valoresSelectUsuarioRelatorio.get(interaction.user.id) != null ? valoresSelectUsuarioRelatorio.get(interaction.user.id)!.join("\n" ): interaction.user.id,
+                value: valoresSelectUsuarioRelatorio.get(interaction.user.id) != null ? valoresSelectUsuarioRelatorio.get(interaction.user.id)!.map(membro => `<@${membro}>`).join("\n" ): `<@${interaction.user.id}>`,
                 inline: false,
             },
             {
