@@ -53,19 +53,19 @@ export function getTempo({ dias = 0, horas = 0, minutos = 0, segundos = 0, milis
     const milissegundosPorMinuto = minutos * 60 * 1000;
     const milissegundosPorSegundo = segundos * 1000;
 
-    const tempoTotalEmMilissegundos = milissegundosPorDia + milissegundosPorHora + milissegundosPorMinuto + milissegundosPorSegundo + milissegundos;
+    const tempoTotal = milissegundosPorDia + milissegundosPorHora + milissegundosPorMinuto + milissegundosPorSegundo + milissegundos;
 
     switch (output) {
         case "dias":
-            return tempoTotalEmMilissegundos / (24 * 60 * 60 * 1000);
+            return tempoTotal / (24 * 60 * 60 * 1000);
         case "horas":
-            return tempoTotalEmMilissegundos / (60 * 60 * 1000);
+            return tempoTotal / (60 * 60 * 1000);
         case "minutos":
-            return tempoTotalEmMilissegundos / (60 * 1000);
+            return tempoTotal / (60 * 1000);
         case "segundos":
-            return tempoTotalEmMilissegundos / 1000;
+            return tempoTotal / 1000;
         case "milissegundos":
         default:
-            return tempoTotalEmMilissegundos;
+            return tempoTotal;
     }
 }
