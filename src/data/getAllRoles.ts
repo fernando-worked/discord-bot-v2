@@ -15,7 +15,7 @@ export const getAllRoles = async () :Promise<RoleRow[]> => {
             pontos,
             categoria
         FROM cargos
-        order by pontos asc
+        order by categoria desc, pontos asc
     `;
 
     const result = await db.all(sql);

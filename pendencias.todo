@@ -1,6 +1,6 @@
+criar comando /status para retornar os dados atual de um jogador (lista de patentes e patente atual)
 criar funcao que retorne todos os cargos roleplay (id, nome, pontuacao, categoria) ordenado por pontuacao e categoria
 criar funcao que retorne todos os membros que possuem ponto, sua patente atual, quantos pontos validos e totais
-criar comando /status para retornar os dados atual de um jogador (lista de patentes e patente atual)
 criar mensagem de boas vindas
 criar selectUser para aplicar o cargo de CQB
 verificar quais outras funcoes o carlBot executa no servidor e replicar as necessarias
