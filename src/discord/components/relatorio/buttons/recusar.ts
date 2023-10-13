@@ -26,7 +26,7 @@ new Component({
         .setFields([
             {
                 name: "Autor",
-                value: oldEmbed.author ? oldEmbed.author.name : "",
+                value: oldEmbed.fields[0].value,
                 inline: true,
             },
             {
@@ -36,7 +36,7 @@ new Component({
             },
             {
                 name: "Avaliador",
-                value: interaction.user.displayName,
+                value: `<@${interaction.user.id}>`,
                 inline: true,
             },
             {

@@ -62,7 +62,7 @@ new Component({
         .setFields([
             {
                 name: "Autor",
-                value: oldEmbed.author ? oldEmbed.author.name : "",
+                value: `<@${interaction.user.id}>`,
                 inline: true,
             },
             {
@@ -105,7 +105,7 @@ new Component({
 
         const embedEnviado = respostaAtual?.embeds[0];
 
-        enviarRelatorio(interaction.message.id, interaction.user.id, Number(oldEmbed.fields[0].value), embedEnviado!.fields[2].value.split("\n"), imageCheckSum);
+        enviarRelatorio(interaction.message.id, interaction.user.id, Number(oldEmbed.fields[0].value), embedEnviado!.fields[2].value.split("\n").map(membro => membro.replaceAll("<@","").replaceAll(">","")), imageCheckSum);
 
         mapInteracaoRelatorio.get(interaction.user.id)!.forEach(async (elemento, index) => {
             elemento.delete();
@@ -118,7 +118,7 @@ new Component({
         const pontosLimites = Number(await getParametro("PONTOS_APROVACAO_AUTOMATICA"));
         if(Number(oldEmbed.fields[0].value) <= pontosLimites && diferencaEmMilissegundosAvaliacao >= parametroMilisAprovacao){
             respostaAtual?.delete();
-            aprovarRelatorio(interaction, embedEnviado);
+            aprovarRelatorio(interaction, respostaAtual);
         }
         
     },

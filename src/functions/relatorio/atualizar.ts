@@ -20,14 +20,16 @@ export const atualizarRelatorio = async (messageId: string, avaliadorId: string,
     await db.run("UPDATE relatorio SET avaliador_id = ?, data_avaliacao = ?, situacao = ?, data_validade = ? WHERE message_id =  ?", avaliadorId, getCurrentISO8601Date(), situacao, getCurrentISO8601Date(diasValidade), messageId);
 
     let atualizacao: UserDataDb[] = [];
-
-    const membrosFormatados = membros!.map(membro => membro.replaceAll("<@", "").replaceAll(">", ""));
-    for (const membro of membrosFormatados) {
-        await db.run("UPDATE relatorio_membros SET pontos = ? WHERE relatorio_message_id = ? AND membro_id = ?", score, messageId, membro);
-        const userData = await getUserData(membro);
-        atualizacao.push(userData);
+    
+    if(membros){
+        const membrosFormatados = membros.map(membro => membro.replaceAll("<@", "").replaceAll(">", ""));
+        for (const membro of membrosFormatados) {
+            await db.run("UPDATE relatorio_membros SET pontos = ? WHERE relatorio_message_id = ? AND membro_id = ?", score, messageId, membro);
+            const userData = await getUserData(membro);
+            atualizacao.push(userData);
+        }
     }
-
+    
     db.close();
     return atualizacao;
 };

@@ -4,7 +4,7 @@ import { RoleUpdate } from "./relatorio/aprovarRelatorio";
 import { manipulaCargos } from "./manipulaCargos";
 import { getTempo } from "./util";
 
-const ciclo = getTempo({segundos: 2});
+const ciclo = getTempo({dias: 1});
 
 export const registerVerify = async () => {
 
@@ -17,11 +17,6 @@ export const registerVerify = async () => {
 
     console.log("Verificando cargos");
     await manipulaCargos(roleUpdate);
-
-    setTimeout(async function() {
-
-        setTimeout(registerVerify, ciclo);
-
-    }, ciclo);
+    setTimeout(registerVerify, ciclo);
     
 };

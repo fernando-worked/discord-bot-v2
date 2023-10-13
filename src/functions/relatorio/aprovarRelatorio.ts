@@ -1,7 +1,7 @@
 import { UserDataDb } from "@/data/getUserData";
 import { RoleRow, getAllRoles } from "@/data/getAllRoles";
 import { atualizarRelatorio } from "@/functions/relatorio/atualizar";
-import { ButtonInteraction, Embed, EmbedBuilder } from "discord.js";
+import { ButtonInteraction, Embed, EmbedBuilder, Message } from "discord.js";
 import { manipulaCargos } from "../manipulaCargos";
 
 export type RoleUpdate = {
@@ -10,12 +10,12 @@ export type RoleUpdate = {
 
 }
 
-export const aprovarRelatorio = (async (interaction: ButtonInteraction<"cached">, embedEnviado?: Embed) => {
+export const aprovarRelatorio = (async (interaction: ButtonInteraction<"cached">, message?: Message<true> | undefined) => {
 
-    const oldEmbed = embedEnviado ? embedEnviado : interaction.message.embeds[0];
+    const oldEmbed = message?.embeds[0] ? message?.embeds[0] : interaction.message.embeds[0];
 
     let userData: UserDataDb[] = [];
-    userData = await atualizarRelatorio(oldEmbed.fields[3].value, interaction.user.id, "A", oldEmbed.fields[2].value.split("\n"));
+    userData = await atualizarRelatorio(oldEmbed.fields[3].value, interaction.user.id, "A", oldEmbed.fields[2].value.split("\n").map(membro => membro.replaceAll("<@","").replaceAll(">","")));
 
     let rolesData: RoleRow[] = [];
     rolesData = await getAllRoles();
@@ -39,7 +39,7 @@ export const aprovarRelatorio = (async (interaction: ButtonInteraction<"cached">
     .setFields([
         {
             name: "Autor",
-            value: oldEmbed.author ? oldEmbed.author.name : "",
+            value: message?.embeds[0] ? message.embeds[0].fields[0].value : `<@${interaction.user.id}>`,
             inline: true,
         },
         {
@@ -49,7 +49,7 @@ export const aprovarRelatorio = (async (interaction: ButtonInteraction<"cached">
         },
         {
             name: "Avaliador",
-            value: interaction.user.displayName,
+            value: `<@${message?.embeds[0] ? message.author.id : interaction.user.id}>`,
             inline: true,
         },
         {
@@ -77,7 +77,7 @@ export const aprovarRelatorio = (async (interaction: ButtonInteraction<"cached">
     const msg = interaction.channel?.messages.fetch(interaction.message.id);
 
 
-    if(msg && !embedEnviado)
+    if(msg && !message?.embeds[0])
     (await msg).delete();
 
 
