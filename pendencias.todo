@@ -1,15 +1,11 @@
 criar mensagem de boas vindas
 criar rotina para apagar o relatorio_membros no evento onLeave
-criar comando /steam que permitirá definir a steam de um membro, usar menu de seleção no usuário para pegar a sua steam
 criar comando para configurar template e atribuir template no onJoin
-modificar ids que aparecem no relatorio para aparecer nome <@ID DO PLAYER>, <@&ID DA ROLE>
 
 criar funcao que retorne todos os cargos roleplay (id, nome, pontuacao, categoria) ordenado por pontuacao e categoria
 criar funcao que retorne todos os membros que possuem ponto, sua patente atual, quantos pontos validos e totais
 criar selectUser para aplicar o cargo de CQB
 verificar quais outras funcoes o carlBot executa no servidor e replicar as necessarias
-
-criar comando /convite
 
 
 

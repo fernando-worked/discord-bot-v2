@@ -1,8 +1,7 @@
 
-import { ApplicationCommandOptionType, ApplicationCommandType, ButtonBuilder, ButtonStyle, ChatInputCommandInteraction, ComponentType, InteractionResponse, ModalBuilder, StringSelectMenuBuilder, UserSelectMenuBuilder } from "discord.js";
+import { ApplicationCommandOptionType, ApplicationCommandType } from "discord.js";
 import { Command } from "../base";
 import { openDb } from "@/data/openDb";
-
 
 const steamRole = "1162228916514205697";
 
