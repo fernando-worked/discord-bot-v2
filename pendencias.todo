@@ -1,6 +1,5 @@
 criar mensagem de boas vindas
 criar rotina para apagar o relatorio_membros no evento onLeave
-criar comando para configurar template e atribuir template no onJoin
 
 criar funcao que retorne todos os cargos roleplay (id, nome, pontuacao, categoria) ordenado por pontuacao e categoria
 criar funcao que retorne todos os membros que possuem ponto, sua patente atual, quantos pontos validos e totais
