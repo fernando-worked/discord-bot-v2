@@ -42,3 +42,99 @@ ao entrar no servidor
 2023-10-17T16:22:53.602500602Z        at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
 
 ao aceitar um relatorio, interacao do envio nao é apagada
+
+
+023-10-17T17:12:38.509369746Z  patenteElegivel: 1016707857317642320
+2023-10-17T17:41:30.657074106Z  ✖  error      DiscordAPIError[50027]: Invalid Webhook Token
+2023-10-17T17:41:30.657123832Z      at handleErrors (/home/node/node_modules/@discordjs/rest/dist/index.js:687:13)
+2023-10-17T17:41:30.657131408Z      at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2023-10-17T17:41:30.657137578Z      at async SequentialHandler.runRequest (/home/node/node_modules/@discordjs/rest/dist/index.js:1072:23)
+2023-10-17T17:41:30.657142908Z      at async SequentialHandler.queueRequest (/home/node/node_modules/@discordjs/rest/dist/index.js:913:14)
+2023-10-17T17:41:30.657148021Z      at async _REST.request (/home/node/node_modules/@discordjs/rest/dist/index.js:1218:22)
+2023-10-17T17:41:30.657152989Z      at async InteractionWebhook.deleteMessage (/home/node/node_modules/discord.js/src/structures/Webhook.js:383:5)
+2023-10-17T17:41:30.657158310Z      at async ChatInputCommandInteraction.deleteReply (/home/node/node_modules/discord.js/src/structures/interfaces/InteractionResponses.js:175:5) {
+2023-10-17T17:41:30.657164404Z    requestBody: { files: undefined, json: undefined },
+2023-10-17T17:41:30.657169641Z    rawError: { message: 'Invalid Webhook Token', code: 50027 },
+2023-10-17T17:41:30.657174504Z    code: 50027,
+2023-10-17T17:41:30.657179299Z    status: 401,
+2023-10-17T17:41:30.657184021Z    method: 'DELETE',
+2023-10-17T17:41:30.657190025Z    url: 'https://discord.com/api/v10/webhooks/1156790251499569195/aW50ZXJhY3Rpb246MTE2Mzg4NzEwNzQwNDczODU4MDo5eHdDM2xkdjd6akRkd2ZlaWx4UUZJRHVlbzVXaUlOaU1hb3RiOFhuV1FpbVBUalhsQXlhTTUyNWkxZ3lJUGtMWjhBMFY5RUdqenZTcHYyeUJoUndIYWpPN1JIMDNpelUzYzJTWU1Uc05YVlNnMkZiNkxqd0Q2a2E1cW5BdU1PeA/messages/@original'
+2023-10-17T17:41:30.657196870Z  } Promise {
+2023-10-17T17:41:30.657201718Z    <rejected> DiscordAPIError[50027]: Invalid Webhook Token
+2023-10-17T17:41:30.657207149Z        at handleErrors (/home/node/node_modules/@discordjs/rest/dist/index.js:687:13)
+2023-10-17T17:41:30.657212021Z        at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2023-10-17T17:41:30.657216819Z        at async SequentialHandler.runRequest (/home/node/node_modules/@discordjs/rest/dist/index.js:1072:23)
+2023-10-17T17:41:30.657222545Z        at async SequentialHandler.queueRequest (/home/node/node_modules/@discordjs/rest/dist/index.js:913:14)
+2023-10-17T17:41:30.657228204Z        at async _REST.request (/home/node/node_modules/@discordjs/rest/dist/index.js:1218:22)
+2023-10-17T17:41:30.657233298Z        at async InteractionWebhook.deleteMessage (/home/node/node_modules/discord.js/src/structures/Webhook.js:383:5)
+2023-10-17T17:41:30.657256626Z        at async ChatInputCommandInteraction.deleteReply (/home/node/node_modules/discord.js/src/structures/interfaces/InteractionResponses.js:175:5) {
+2023-10-17T17:41:30.657263286Z      requestBody: { files: undefined, json: undefined },
+2023-10-17T17:41:30.657268784Z      rawError: { message: 'Invalid Webhook Token', code: 50027 },
+2023-10-17T17:41:30.657273797Z      code: 50027,
+2023-10-17T17:41:30.657278809Z      status: 401,
+2023-10-17T17:41:30.657284307Z      method: 'DELETE',
+2023-10-17T17:41:30.657289450Z      url: 'https://discord.com/api/v10/webhooks/1156790251499569195/aW50ZXJhY3Rpb246MTE2Mzg4NzEwNzQwNDczODU4MDo5eHdDM2xkdjd6akRkd2ZlaWx4UUZJRHVlbzVXaUlOaU1hb3RiOFhuV1FpbVBUalhsQXlhTTUyNWkxZ3lJUGtMWjhBMFY5RUdqenZTcHYyeUJoUndIYWpPN1JIMDNpelUzYzJTWU1Uc05YVlNnMkZiNkxqd0Q2a2E1cW5BdU1PeA/messages/@original'
+2023-10-17T17:41:30.657295653Z    }
+2023-10-17T17:41:30.657300736Z  }
+2023-10-17T17:41:31.069535883Z  ✖  error      DiscordAPIError[50027]: Invalid Webhook Token
+2023-10-17T17:41:31.069554665Z      at handleErrors (/home/node/node_modules/@discordjs/rest/dist/index.js:687:13)
+2023-10-17T17:41:31.069560603Z      at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2023-10-17T17:41:31.069566100Z      at async SequentialHandler.runRequest (/home/node/node_modules/@discordjs/rest/dist/index.js:1072:23)
+2023-10-17T17:41:31.069571527Z      at async SequentialHandler.queueRequest (/home/node/node_modules/@discordjs/rest/dist/index.js:913:14)
+2023-10-17T17:41:31.069576739Z      at async _REST.request (/home/node/node_modules/@discordjs/rest/dist/index.js:1218:22)
+2023-10-17T17:41:31.069581812Z      at async InteractionWebhook.deleteMessage (/home/node/node_modules/discord.js/src/structures/Webhook.js:383:5)
+2023-10-17T17:41:31.069587129Z      at async UserSelectMenuInteraction.deleteReply (/home/node/node_modules/discord.js/src/structures/interfaces/InteractionResponses.js:175:5) {
+2023-10-17T17:41:31.069600067Z    requestBody: { files: undefined, json: undefined },
+2023-10-17T17:41:31.069605004Z    rawError: { message: 'Invalid Webhook Token', code: 50027 },
+2023-10-17T17:41:31.069609918Z    code: 50027,
+2023-10-17T17:41:31.069614678Z    status: 401,
+2023-10-17T17:41:31.069619471Z    method: 'DELETE',
+2023-10-17T17:41:31.069624397Z    url: 'https://discord.com/api/v10/webhooks/1156790251499569195/aW50ZXJhY3Rpb246MTE2Mzg4NzEyOTExMDI2OTk1MjpCZENGWWQ0RVVVN3JHZHRmNVlQb2ZHcFdFTGZ2clJIdzdIMEZBbWpNS0cwcVJQRU1NT0JYMXdSZkFqbWtZclIxWTN3eHB4TEpMZXpncUhTZEIxa0YySThlR3hYTEZPZ0xhRFRKRE1jZDZZNmFLV3lnNHBaeklJZ0J6UnIwTWRobA/messages/@original'
+2023-10-17T17:41:31.069630322Z  } Promise {
+2023-10-17T17:41:31.069635133Z    <rejected> DiscordAPIError[50027]: Invalid Webhook Token
+2023-10-17T17:41:31.069640564Z        at handleErrors (/home/node/node_modules/@discordjs/rest/dist/index.js:687:13)
+2023-10-17T17:41:31.069645527Z        at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2023-10-17T17:41:31.069669352Z        at async SequentialHandler.runRequest (/home/node/node_modules/@discordjs/rest/dist/index.js:1072:23)
+2023-10-17T17:41:31.069675340Z        at async SequentialHandler.queueRequest (/home/node/node_modules/@discordjs/rest/dist/index.js:913:14)
+2023-10-17T17:41:31.069680570Z        at async _REST.request (/home/node/node_modules/@discordjs/rest/dist/index.js:1218:22)
+2023-10-17T17:41:31.069685451Z        at async InteractionWebhook.deleteMessage (/home/node/node_modules/discord.js/src/structures/Webhook.js:383:5)
+2023-10-17T17:41:31.069691655Z        at async UserSelectMenuInteraction.deleteReply (/home/node/node_modules/discord.js/src/structures/interfaces/InteractionResponses.js:175:5) {
+2023-10-17T17:41:31.069697149Z      requestBody: { files: undefined, json: undefined },
+2023-10-17T17:41:31.069702327Z      rawError: { message: 'Invalid Webhook Token', code: 50027 },
+2023-10-17T17:41:31.069707308Z      code: 50027,
+2023-10-17T17:41:31.069712063Z      status: 401,
+2023-10-17T17:41:31.069716862Z      method: 'DELETE',
+2023-10-17T17:41:31.069721822Z      url: 'https://discord.com/api/v10/webhooks/1156790251499569195/aW50ZXJhY3Rpb246MTE2Mzg4NzEyOTExMDI2OTk1MjpCZENGWWQ0RVVVN3JHZHRmNVlQb2ZHcFdFTGZ2clJIdzdIMEZBbWpNS0cwcVJQRU1NT0JYMXdSZkFqbWtZclIxWTN3eHB4TEpMZXpncUhTZEIxa0YySThlR3hYTEZPZ0xhRFRKRE1jZDZZNmFLV3lnNHBaeklJZ0J6UnIwTWRobA/messages/@original'
+2023-10-17T17:41:31.069727943Z    }
+2023-10-17T17:41:31.069732644Z  }
+2023-10-17T17:41:31.121999224Z  ✖  error      DiscordAPIError[50027]: Invalid Webhook Token
+2023-10-17T17:41:31.122018245Z      at handleErrors (/home/node/node_modules/@discordjs/rest/dist/index.js:687:13)
+2023-10-17T17:41:31.122024277Z      at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2023-10-17T17:41:31.122029823Z      at async SequentialHandler.runRequest (/home/node/node_modules/@discordjs/rest/dist/index.js:1072:23)
+2023-10-17T17:41:31.122035273Z      at async SequentialHandler.queueRequest (/home/node/node_modules/@discordjs/rest/dist/index.js:913:14)
+2023-10-17T17:41:31.122040544Z      at async _REST.request (/home/node/node_modules/@discordjs/rest/dist/index.js:1218:22)
+2023-10-17T17:41:31.122045585Z      at async InteractionWebhook.deleteMessage (/home/node/node_modules/discord.js/src/structures/Webhook.js:383:5)
+2023-10-17T17:41:31.122050824Z      at async UserSelectMenuInteraction.deleteReply (/home/node/node_modules/discord.js/src/structures/interfaces/InteractionResponses.js:175:5) {
+2023-10-17T17:41:31.122056135Z    requestBody: { files: undefined, json: undefined },
+2023-10-17T17:41:31.122060913Z    rawError: { message: 'Invalid Webhook Token', code: 50027 },
+2023-10-17T17:41:31.122065776Z    code: 50027,
+2023-10-17T17:41:31.122070496Z    status: 401,
+2023-10-17T17:41:31.122075307Z    method: 'DELETE',
+2023-10-17T17:41:31.122080359Z    url: 'https://discord.com/api/v10/webhooks/1156790251499569195/aW50ZXJhY3Rpb246MTE2Mzg5MDI4MzQ1MzM2NjM2MzpEd21sSVNNVFd4Y28zZWI2Ukx2UmRWZEg1REFRNzdaWlh5UTJXdmd3bmFXeXQxMEJ3T2JWQ1NpbHZoaVJESkpmbEpaMDhMaTBvaG5zUTZ3REpHVDlwdmJLN0NxMlVsNllQS0NGRmVTdThFZW1RZk52VUVJVFRpa3k5NXBFTlNUSA/messages/@original'
+2023-10-17T17:41:31.122096514Z  } Promise {
+2023-10-17T17:41:31.122101842Z    <rejected> DiscordAPIError[50027]: Invalid Webhook Token
+2023-10-17T17:41:31.122111500Z        at handleErrors (/home/node/node_modules/@discordjs/rest/dist/index.js:687:13)
+2023-10-17T17:41:31.122116500Z        at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2023-10-17T17:41:31.122121383Z        at async SequentialHandler.runRequest (/home/node/node_modules/@discordjs/rest/dist/index.js:1072:23)
+2023-10-17T17:41:31.122126387Z        at async SequentialHandler.queueRequest (/home/node/node_modules/@discordjs/rest/dist/index.js:913:14)
+2023-10-17T17:41:31.122131400Z        at async _REST.request (/home/node/node_modules/@discordjs/rest/dist/index.js:1218:22)
+2023-10-17T17:41:31.122136320Z        at async InteractionWebhook.deleteMessage (/home/node/node_modules/discord.js/src/structures/Webhook.js:383:5)
+2023-10-17T17:41:31.122142044Z        at async UserSelectMenuInteraction.deleteReply (/home/node/node_modules/discord.js/src/structures/interfaces/InteractionResponses.js:175:5) {
+2023-10-17T17:41:31.122147530Z      requestBody: { files: undefined, json: undefined },
+2023-10-17T17:41:31.122152317Z      rawError: { message: 'Invalid Webhook Token', code: 50027 },
+2023-10-17T17:41:31.122157272Z      code: 50027,
+2023-10-17T17:41:31.122162120Z      status: 401,
+2023-10-17T17:41:31.122166877Z      method: 'DELETE',
+2023-10-17T17:41:31.122171545Z      url: 'https://discord.com/api/v10/webhooks/1156790251499569195/aW50ZXJhY3Rpb246MTE2Mzg5MDI4MzQ1MzM2NjM2MzpEd21sSVNNVFd4Y28zZWI2Ukx2UmRWZEg1REFRNzdaWlh5UTJXdmd3bmFXeXQxMEJ3T2JWQ1NpbHZoaVJESkpmbEpaMDhMaTBvaG5zUTZ3REpHVDlwdmJLN0NxMlVsNllQS0NGRmVTdThFZW1RZk52VUVJVFRpa3k5NXBFTlNUSA/messages/@original'
+2023-10-17T17:41:31.122177393Z    }
+2023-10-17T17:41:31.122182153Z  }
