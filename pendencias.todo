@@ -13,3 +13,32 @@ criar selectUser para aplicar o cargo de CQB
     MILISSEGUNDOS_APROVACAO_AUTOMATICA - Quanto tempo deve ter passado da última aprovação daquele usuário para que novos relatórios sejam automaticamente aprovados (INTEGER)
     MULTIPLICADOR_XP_BASE - Multiplicador de XP usado para multiplicar o score (Valor padrão = 1) (Double separado por vírgula)
 */
+
+
+pendencias-bug
+
+ao entrar no servidor
+2023-10-17T16:22:53.602356355Z  ✖  error      ReferenceError: Canais is not defined
+2023-10-17T16:22:53.602379974Z      at Client.run (/home/node/dist/discord/events/member/onJoin.js:8:60)
+2023-10-17T16:22:53.602386042Z      at Client.emit (node:events:517:28)
+2023-10-17T16:22:53.602391033Z      at module.exports [as GUILD_MEMBER_ADD] (/home/node/node_modules/discord.js/src/client/websocket/handlers/GUILD_MEMBER_ADD.js:17:14)
+2023-10-17T16:22:53.602396289Z      at WebSocketManager.handlePacket (/home/node/node_modules/discord.js/src/client/websocket/WebSocketManager.js:355:31)
+2023-10-17T16:22:53.602417691Z      at WebSocketManager.<anonymous> (/home/node/node_modules/discord.js/src/client/websocket/WebSocketManager.js:239:12)
+2023-10-17T16:22:53.602424183Z      at WebSocketManager.emit (/home/node/node_modules/@vladfrangu/async_event_emitter/dist/index.js:282:31)
+2023-10-17T16:22:53.602429805Z      at WebSocketShard.<anonymous> (/home/node/node_modules/@discordjs/ws/dist/index.js:1173:51)
+2023-10-17T16:22:53.602434983Z      at WebSocketShard.emit (/home/node/node_modules/@vladfrangu/async_event_emitter/dist/index.js:282:31)
+2023-10-17T16:22:53.602439987Z      at WebSocketShard.onMessage (/home/node/node_modules/@discordjs/ws/dist/index.js:988:14)
+2023-10-17T16:22:53.602444825Z      at process.processTicksAndRejections (node:internal/process/task_queues:95:5) Promise {
+2023-10-17T16:22:53.602449921Z    <rejected> ReferenceError: Canais is not defined
+2023-10-17T16:22:53.602454839Z        at Client.run (/home/node/dist/discord/events/member/onJoin.js:8:60)
+2023-10-17T16:22:53.602459665Z        at Client.emit (node:events:517:28)
+2023-10-17T16:22:53.602464440Z        at module.exports [as GUILD_MEMBER_ADD] (/home/node/node_modules/discord.js/src/client/websocket/handlers/GUILD_MEMBER_ADD.js:17:14)
+2023-10-17T16:22:53.602469834Z        at WebSocketManager.handlePacket (/home/node/node_modules/discord.js/src/client/websocket/WebSocketManager.js:355:31)
+2023-10-17T16:22:53.602474849Z        at WebSocketManager.<anonymous> (/home/node/node_modules/discord.js/src/client/websocket/WebSocketManager.js:239:12)
+2023-10-17T16:22:53.602479835Z        at WebSocketManager.emit (/home/node/node_modules/@vladfrangu/async_event_emitter/dist/index.js:282:31)
+2023-10-17T16:22:53.602484763Z        at WebSocketShard.<anonymous> (/home/node/node_modules/@discordjs/ws/dist/index.js:1173:51)
+2023-10-17T16:22:53.602489675Z        at WebSocketShard.emit (/home/node/node_modules/@vladfrangu/async_event_emitter/dist/index.js:282:31)
+2023-10-17T16:22:53.602494521Z        at WebSocketShard.onMessage (/home/node/node_modules/@discordjs/ws/dist/index.js:988:14)
+2023-10-17T16:22:53.602500602Z        at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+
+ao aceitar um relatorio, interacao do envio nao é apagada
