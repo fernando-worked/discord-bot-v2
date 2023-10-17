@@ -15,7 +15,6 @@ export const registerVerify = async () => {
     roleUpdate.userData = usersData;
     roleUpdate.cargos = rolesData;
 
-    console.log("Verificando cargos");
     await manipulaCargos(roleUpdate);
     setTimeout(registerVerify, ciclo);
     

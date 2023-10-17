@@ -1,4 +1,4 @@
-arrumar configuracao de parametros e cargos iniciais
+
 
 criar funcao que retorne todos os cargos roleplay (id, nome, pontuacao, categoria) ordenado por pontuacao e categoria
 criar funcao que retorne todos os membros que possuem ponto, sua patente atual, quantos pontos validos e totais

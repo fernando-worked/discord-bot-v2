@@ -1,17 +1,19 @@
-import { sleep } from "@magicyan/discord";
-import { configDB } from "./data/teste";
+
+import { configDB } from "./data/configDB";
 import { createClient } from "./discord/base";
 import { log } from "./settings";
+import ck from "chalk";
 
-const preConfig = async () =>{
-    await configDB();
-    sleep(20000);
-};
+configDB().then(() => {
+    log.info(`${ck.greenBright("Banco de dados configurado")}`);
 
-preConfig();
+    const client = createClient();
+    client.start();
 
-const client = createClient();
-client.start();
+    process.on("uncaughtException", log.error);
+    process.on("unhandledRejection", log.error);
+}).catch(error => {
+    console.error("Ocorreu um erro:", error);
+ });
 
-process.on("uncaughtException", log.error);
-process.on("unhandledRejection", log.error);
+

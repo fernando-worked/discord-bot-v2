@@ -2,23 +2,23 @@ import { setPontosCargo } from "@/functions/cargos/set";
 import { openDb } from "./openDb";
 import { setParametro } from "./parametros";
 import { getTempo } from "@/functions/util";
+import { RoleSelectMenuInteraction } from "discord.js";
 
-export const configDB = async () => {
+export const configDB = async (): Promise<void> => {
     const db = await openDb();
     await db.exec("CREATE TABLE if not exists relatorio (message_id TEXT, author_id TEXT, score_informado NUMBER, situacao TEXT, avaliador_id TEXT, data_envio TEXT, data_avaliacao TEXT, data_validade TEXT, img_checksum TEXT)");
     await db.exec("CREATE TABLE if not exists relatorio_membros (relatorio_message_id TEXT, membro_id TEXT, pontos NUMBER)");
     await db.exec("CREATE TABLE if not exists steam (memberId TEXT, steamId text)");
 
-    const resultCreateCargos = await db.exec("CREATE TABLE if not exists cargos (cargo_id TEXT, pontos NUMBER, categoria TEXT)");
-    configCargos(resultCreateCargos);
-    const resultCreateParametros = await db.exec("CREATE TABLE if not exists parametros (chave TEXT, valor TEXT)");
-    configParametros(resultCreateParametros);
+    await db.exec("CREATE TABLE if not exists cargos (cargo_id TEXT, pontos NUMBER, categoria TEXT)");
+    await configCargos();
+    await db.exec("CREATE TABLE if not exists parametros (chave TEXT, valor TEXT)");
+    await configParametros();
     db.close();
 
 };
 
-const configParametros = (result: any) => {
-    console.log("executado configuracao de parametros");
+const configParametros = async ()=> {
     type Parametro = {
         chave: string,
         valor: string | number,
@@ -33,15 +33,13 @@ const configParametros = (result: any) => {
     parametros.push({chave: "MILISSEGUNDOS_APROVACAO_AUTOMATICA", valor: getTempo({milissegundos: 1})});
     parametros.push({chave: "MULTIPLICADOR_XP_BASE", valor: "1"});
 
-    parametros.forEach((parametro) =>{
-        setParametro(parametro.chave, parametro.valor);
-    });
+    for(let parametro of parametros){
+        await setParametro(parametro.chave, parametro.valor);
+    }
         
 };
 
-const configCargos = (result: any) =>{
-
-    console.log("executado configuracao de cargos");
+const configCargos = async () =>{
 
     enum Cargos {
         /* PATENTES */
@@ -109,8 +107,9 @@ const configCargos = (result: any) =>{
     cargos.push({cargoId: Cargos.OURO_2, pontos: 80000, categoria: Categorias.MEDALHA});
     cargos.push({cargoId: Cargos.OURO_3, pontos: 90000, categoria: Categorias.MEDALHA});
 
-    cargos.forEach((cargo) => {
-        setPontosCargo(cargo.cargoId, cargo.pontos, cargo.categoria);
-    });
+    for(let cargo of cargos){
+        await setPontosCargo(cargo.cargoId, cargo.pontos, cargo.categoria);
+
+    }
 
 };

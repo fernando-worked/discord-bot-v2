@@ -15,6 +15,8 @@ new Event({
         meuBot = client;
 
         registerVerify();
+        log.info(`${ck.greenBright("Registrado verificação de cargos")}`);
+
 
     },
 });

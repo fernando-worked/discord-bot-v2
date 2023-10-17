@@ -5,8 +5,7 @@ import { getAll, setParametro } from "@/data/parametros";
 (async () => {
     let parametros: {name: string, value: string}[] = [];
     parametros = await getAll();
-    console.log(parametros);
-
+    
     new Command({
         name: "parametros",
         dmPermission,

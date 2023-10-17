@@ -1,9 +1,11 @@
 import { log, processEnv } from "@/settings";
 import ck from "chalk";
-import { ApplicationCommandType, AutocompleteInteraction, BitFieldResolvable, ChatInputCommandInteraction, Client, ClientOptions, CommandInteraction, GatewayIntentsString, IntentsBitField, MessageContextMenuCommandInteraction, Partials, UserContextMenuCommandInteraction, version } from "discord.js";
+import { ApplicationCommandType, AutocompleteInteraction, BitFieldResolvable, ChatInputCommandInteraction, Client, ClientOptions, CommandInteraction, GatewayIntentsString, IntentsBitField, MessageContextMenuCommandInteraction, Partials, PermissionsBitField, UserContextMenuCommandInteraction, version, } from "discord.js";
 import { glob } from "glob";
 import { join } from "node:path";
 import { Command, Component, Event } from ".";
+
+
 
 export function createClient(options?: ClientOptions): Client {
     const client = new Client({
@@ -28,6 +30,7 @@ export function createClient(options?: ClientOptions): Client {
     };
 
     client.on("interactionCreate", interaction => {
+
         const onAutoComplete = (autoCompleteInteraction: AutocompleteInteraction) => {
             const command = Command.all.get(autoCompleteInteraction.commandName);
             const interaction = autoCompleteInteraction as AutocompleteInteraction;
@@ -35,9 +38,14 @@ export function createClient(options?: ClientOptions): Client {
                 command.autoComplete(interaction);
             }
         };
-        const onCommand = (commandInteraction: CommandInteraction) => {
+        const onCommand = async (commandInteraction: CommandInteraction) => {
             const command = Command.all.get(commandInteraction.commandName);
-    
+            const member = await commandInteraction.guild!.members.fetch(interaction.user.id);
+            const isAdmin = member.permissions.has(PermissionsBitField.Flags.Administrator);
+
+            if(interaction.client.user.presence.status == "invisible" && commandInteraction.commandName != "status") return commandInteraction.reply({content: "Estou indispónivel no momento.", ephemeral: true});
+            if(interaction.client.user.presence.status == "dnd" && !isAdmin && commandInteraction.commandName != "status") return commandInteraction.reply({content: "Respondendo apenas administradores.", ephemeral: true});
+
             switch(command?.type){
                 case ApplicationCommandType.ChatInput:{
                     const interaction = commandInteraction as ChatInputCommandInteraction;
