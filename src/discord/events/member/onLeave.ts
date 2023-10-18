@@ -1,4 +1,5 @@
 import { deleteUserData } from "@/data/deleteUserData";
+import { Canais } from "@/settings/constants/enum";
 import { Event } from "@discord/base";
 
 new Event({
@@ -12,4 +13,4 @@ new Event({
 
         deleteUserData(member.id);
     },
-});
+}); 

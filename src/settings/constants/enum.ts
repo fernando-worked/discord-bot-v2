@@ -1,10 +1,10 @@
-enum CargosIniciais {
+export enum CargosIniciais {
     PATENTE = "1016702900292042872",
     CERTIFICACOES = "1016703165741142176",
     CONDECORACOES = "1016727204975083631",
     EXTRAS = "1016724286632906775",
 }
 
-enum Canais {
+export enum Canais {
     GERAL = "1016455729416261667",
 }

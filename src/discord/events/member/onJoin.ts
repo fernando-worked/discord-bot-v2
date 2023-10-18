@@ -1,3 +1,4 @@
+import { Canais, CargosIniciais } from "@/settings/constants/enum";
 import { Event } from "@discord/base";
 import { EmbedBuilder } from "discord.js";
 

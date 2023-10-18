@@ -4,11 +4,9 @@
   "main": "dist/index.js",
   "scripts": {
     "start": "node .",
-    "dev": "npm run alterar-variavel-desenvolvimento && ts-node -r tsconfig-paths/register --transpiler sucrase/ts-node-plugin src/index.ts",
-    "build": "npm run alterar-variavel-producao && tsc && tscpaths -p tsconfig.json -s ./src -o ./dist",
-    "alterar-variavel-producao": "dotenv -e .env set NODE_ENV=producao && PowerShell -Command \"(Get-Content .env) -replace '^NODE_ENV=.*', 'NODE_ENV=producao' | Set-Content .env\"",
-    "alterar-variavel-desenvolvimento": "dotenv -e .env set NODE_ENV=desenvolvimento && PowerShell -Command \"(Get-Content .env) -replace '^NODE_ENV=.*', 'NODE_ENV=desenvolvimento' | Set-Content .env\""
-  },
+    "dev": "ts-node -r tsconfig-paths/register --transpiler sucrase/ts-node-plugin src/index.ts",
+    "build": "tsc && tscpaths -p tsconfig.json -s ./src -o ./dist"
+    },
   "keywords": [
     "bot",
     "discord"
@@ -18,6 +16,7 @@
     "@types/signale": "^1.4.4",
     "@typescript-eslint/eslint-plugin": "^6.5.0",
     "@typescript-eslint/parser": "^6.5.0",
+    "dotenv-cli": "^7.3.0",
     "sucrase": "^3.34.0",
     "ts-node": "^10.9.1",
     "tsconfig-paths": "^4.2.0",
