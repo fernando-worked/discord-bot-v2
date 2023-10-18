@@ -4,8 +4,10 @@
   "main": "dist/index.js",
   "scripts": {
     "start": "node .",
-    "dev": "ts-node -r tsconfig-paths/register --transpiler sucrase/ts-node-plugin src/index.ts",
-    "build": "tsc && tscpaths -p tsconfig.json -s ./src -o ./dist"
+    "dev": "npm run alterar-variavel-desenvolvimento && ts-node -r tsconfig-paths/register --transpiler sucrase/ts-node-plugin src/index.ts",
+    "build": "npm run alterar-variavel-producao && tsc && tscpaths -p tsconfig.json -s ./src -o ./dist",
+    "alterar-variavel-producao": "dotenv -e .env set NODE_ENV=producao && PowerShell -Command \"(Get-Content .env) -replace '^NODE_ENV=.*', 'NODE_ENV=producao' | Set-Content .env\"",
+    "alterar-variavel-desenvolvimento": "dotenv -e .env set NODE_ENV=desenvolvimento && PowerShell -Command \"(Get-Content .env) -replace '^NODE_ENV=.*', 'NODE_ENV=desenvolvimento' | Set-Content .env\""
   },
   "keywords": [
     "bot",

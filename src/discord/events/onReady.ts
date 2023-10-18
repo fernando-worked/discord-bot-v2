@@ -16,7 +16,5 @@ new Event({
 
         registerVerify();
         log.info(`${ck.greenBright("Registrado verificação de cargos")}`);
-
-
     },
 });
