@@ -39,7 +39,7 @@ export const aprovarRelatorio = (async (interaction: ButtonInteraction<"cached">
     .setFields([
         {
             name: "Autor",
-            value: message?.embeds[0] ? message.embeds[0].fields[0].value : `<@${interaction.user.id}>`,
+            value: oldEmbed ? oldEmbed.fields[0].value : `<@${interaction.user.id}>`,
             inline: true,
         },
         {

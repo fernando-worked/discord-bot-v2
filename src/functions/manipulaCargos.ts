@@ -18,7 +18,6 @@ export const manipulaCargos = async (roleUpdate: RoleUpdate) =>{
     
         const member = await guild.members.fetch(membro.id!);
     
-        
         roleUpdate.cargos?.filter(cargo => cargo.categoria == "PATENTE").forEach(async (cargo) =>{
             // Patentes
             if((member.roles.cache.has(cargo.cargoId!) && (cargo.cargoId != patenteElegivel || !patenteElegivel)) || typeof patenteElegivel == "undefined"){

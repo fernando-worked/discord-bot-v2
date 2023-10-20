@@ -52,8 +52,8 @@ new Command({
         return interaction.reply({content: `O usuário ${targetMember.user.displayName} não possui uma Steam configurada!`,ephemeral: true});
 
         const steamId = await getSteam(targetMember.id);
-        interaction.reply({content: `Steam do membro ${targetMember.user.displayName}: ${steamId}`});
-       
+        interaction.reply({content: `Steam do membro <@${targetMember.user.id}> é ${steamId}`});
+
     },
     
 });
@@ -85,7 +85,7 @@ const getSteam = async (memberId: string) => {
 
     db.close();
 
-    return result[0].steamId;
+    return result.length > 0 ? result[0].steamId : "indefinida";
     
 };
 

@@ -9,7 +9,7 @@ new Event({
         
         const embed = new EmbedBuilder()
         .setTitle(`${member}, seja bem vindo ao servidor SWAT BR`)
-        .setDescription(`O primeiro e único servidor roleplay de Ready or Not Brasileiro!\n\n
+        .setDescription(`O primeiro e único servidor roleplay de Ready or Not Brasileiro!
 
         Em nosso servidor, você pode fazer o CURSO CQB e diversos outros para aprender e aumentar a sua imersão no jogo. Você também pode usar o comando /relatorio para anexar a imagem que aparece no fim da missão e acumular pontos, para subir sua patente e obter medalhas exclusivas.`)
         .setFields([
