@@ -53,7 +53,7 @@ new Command({
         ])
         .setFooter({text: "Informe seus relatórios através do comando /relatorio para aumentar seus pontos!"});
 
-        interaction.reply({embeds: [embed]});
+        interaction.reply({embeds: [embed], ephemeral: true});
     
     },
 });
