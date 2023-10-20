@@ -31,7 +31,8 @@ new Event({
         if(canalGeral && canalGeral.isTextBased())
         canalGeral.send({embeds: [embed]});
     
-        for (let cargo in cargosIniciais) {
+        
+        for (let cargo of cargosIniciais) {
             
             const role = member.guild.roles.cache.get(cargo);
             
