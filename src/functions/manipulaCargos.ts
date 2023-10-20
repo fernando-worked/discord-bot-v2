@@ -17,22 +17,22 @@ export const manipulaCargos = async (roleUpdate: RoleUpdate) =>{
         const medalhaElegivel = medalhasElegiveis && medalhasElegiveis.length > 0 ? medalhasElegiveis[medalhasElegiveis.length - 1].cargoId : null;
     
         const member = await guild.members.fetch(membro.id!);
+        console.log(`membro ${member.id} ${member.user.displayName}`);
     
         roleUpdate.cargos?.filter(cargo => cargo.categoria == "PATENTE").forEach(async (cargo) =>{
             // Patentes
+            console.log(`Patentes ${cargo.cargoId} ${cargo.pontos}`);
             if((member.roles.cache.has(cargo.cargoId!) && (cargo.cargoId != patenteElegivel || !patenteElegivel)) || typeof patenteElegivel == "undefined"){
-                
-                console.log(`patente remover\ncargoId: ${cargo.cargoId}\npatenteElegivel: ${patenteElegivel}`);
-                
+                                 
                 const role = await guild.roles.fetch(cargo.cargoId!);
+                console.log(`Removendo ${role?.name} ${cargo.cargoId} ${cargo.pontos}`);
                 member.roles.remove(role!);
             } 
 
             if (!member.roles.cache.has(patenteElegivel!) && patenteElegivel == cargo.cargoId){
 
-                console.log(`patente adicionar\ncargoId: ${cargo.cargoId}\npatenteElegivel: ${patenteElegivel}`);
-
                 const role = await guild.roles.fetch(patenteElegivel!);
+                console.log(`Adicionando ${role?.name} ${cargo.cargoId} ${cargo.pontos}`);
                 member.roles.add(role!);
             }
         });
@@ -41,16 +41,12 @@ export const manipulaCargos = async (roleUpdate: RoleUpdate) =>{
         roleUpdate.cargos?.filter(cargo => cargo.categoria == "MEDALHA").forEach(async (cargo) =>{
             // Medalhas
             if((member.roles.cache.has(cargo.cargoId!) && (cargo.cargoId != medalhaElegivel || !medalhaElegivel)) || typeof medalhaElegivel == "undefined"){
-                
-                console.log(`medalha remover\ncargoId: ${cargo.cargoId}\nmedalhaElegivel: ${medalhaElegivel}`);
-                
+                                
                 const role = await guild.roles.fetch(cargo.cargoId!);
                 member.roles.remove(role!);
             }
             
             if (!member.roles.cache.has(medalhaElegivel!) && medalhaElegivel == cargo.cargoId){
-
-                console.log(`medalha adicionar\ncargoId: ${cargo.cargoId}\nmedalhaElegivel: ${medalhaElegivel}`);
 
                 const role = await guild.roles.fetch(medalhaElegivel!);
                 member.roles.add(role!);
