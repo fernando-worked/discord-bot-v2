@@ -4,7 +4,7 @@ import { RoleUpdate } from "./relatorio/aprovarRelatorio";
 import { manipulaCargos } from "./manipulaCargos";
 import { getTempo } from "./util";
 
-const ciclo = getTempo({segundos: 5});
+const ciclo = getTempo({dias: 1});
 
 export const registerVerify = async () => {
 

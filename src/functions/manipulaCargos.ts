@@ -17,7 +17,7 @@ export const manipulaCargos = async (roleUpdate: RoleUpdate) =>{
         const medalhaElegivel = medalhasElegiveis && medalhasElegiveis.length > 0 ? medalhasElegiveis[medalhasElegiveis.length - 1].cargoId : null;
     
         const member = await guild.members.fetch(membro.id!);
-        console.log(`membro ${member.id} ${member.user.displayName}`);
+        console.log(`membro ${member.id} ${member.user.displayName} ${membro.totalPontosValidos}`);
     
         roleUpdate.cargos?.filter(cargo => cargo.categoria == "PATENTE").forEach(async (cargo) =>{
             // Patentes
@@ -26,14 +26,14 @@ export const manipulaCargos = async (roleUpdate: RoleUpdate) =>{
                                  
                 const role = await guild.roles.fetch(cargo.cargoId!);
                 console.log(`Removendo ${role?.name} ${cargo.cargoId} ${cargo.pontos}`);
-                member.roles.remove(role!);
+                await member.roles.remove(role!);
             } 
 
             if (!member.roles.cache.has(patenteElegivel!) && patenteElegivel == cargo.cargoId){
 
                 const role = await guild.roles.fetch(patenteElegivel!);
                 console.log(`Adicionando ${role?.name} ${cargo.cargoId} ${cargo.pontos}`);
-                member.roles.add(role!);
+                await member.roles.add(role!);
             }
         });
         
@@ -43,13 +43,13 @@ export const manipulaCargos = async (roleUpdate: RoleUpdate) =>{
             if((member.roles.cache.has(cargo.cargoId!) && (cargo.cargoId != medalhaElegivel || !medalhaElegivel)) || typeof medalhaElegivel == "undefined"){
                                 
                 const role = await guild.roles.fetch(cargo.cargoId!);
-                member.roles.remove(role!);
+                await member.roles.remove(role!);
             }
             
             if (!member.roles.cache.has(medalhaElegivel!) && medalhaElegivel == cargo.cargoId){
 
                 const role = await guild.roles.fetch(medalhaElegivel!);
-                member.roles.add(role!);
+                await member.roles.add(role!);
             }
         });
         
