@@ -1,4 +1,4 @@
-import { Canais, CargosIniciais } from "@/settings/constants/enum";
+import { Canais, cargosIniciais } from "@/settings/constants/enum";
 import { Event } from "@discord/base";
 import { EmbedBuilder } from "discord.js";
 
@@ -30,10 +30,14 @@ new Event({
 
         if(canalGeral && canalGeral.isTextBased())
         canalGeral.send({embeds: [embed]});
-
-        for(let cargo in CargosIniciais){
+    
+        for (let cargo in cargosIniciais) {
+            
             const role = member.guild.roles.cache.get(cargo);
-            if(role) member.roles.add(role);
+            
+            if (role) {
+                member.roles.add(role);
+            }
         }
     },
 });

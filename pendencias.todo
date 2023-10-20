@@ -4,6 +4,10 @@ criar funcao que retorne todos os cargos roleplay (id, nome, pontuacao, categori
 criar funcao que retorne todos os membros que possuem ponto, sua patente atual, quantos pontos validos e totais
 criar selectUser para aplicar o cargo de CQB
 
+autor esta incorreto quando aprova um relatorio
+alterar comando /eu para ephemeral
+nao alterou role corretamente no processo automatico (era coronel e deveria ser tenente - ficou coronel e tenente), medalha foi removida
+
 
 /*
     DIAS_VENCIMENTO_PONTOS - Qual a validade dos pontos em dias, a partir da avaliação (INTEGER)

@@ -8,8 +8,10 @@ new Event({
         
         const canalGeral = member.guild.channels.cache.get(Canais.GERAL);
 
-        if(canalGeral && canalGeral.isTextBased())
-        canalGeral.send({content: `O membro ${member} deixou o servidor.`});
+        console.log(canalGeral);
+        if(canalGeral && canalGeral.isTextBased()){
+            canalGeral.send({content: `O membro ${member} deixou o servidor.`});
+        }
 
         deleteUserData(member.id);
     },
