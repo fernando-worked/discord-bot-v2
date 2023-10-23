@@ -9,5 +9,5 @@ export const cargosIniciais: string[] = [CargosIniciais.PATENTE, CargosIniciais.
 
 
 export enum Canais {
-    GERAL = "1047616330351788113",
+    GERAL = "1016455729416261667",
 }
