@@ -1,40 +1,13 @@
+sistema de ticket
 
+/ticket abrir - cria um novo canal de texto, adiciona o membro que executou o comando e os membros permitidos
 
-criar funcao que retorne todos os cargos roleplay (id, nome, pontuacao, categoria) ordenado por pontuacao e categoria
-criar funcao que retorne todos os membros que possuem ponto, sua patente atual, quantos pontos validos e totais
-criar selectUser para aplicar o cargo de CQB
+/ticket encerrar - finaliza um ticket, excluindo o canal de texto (quem o criou e membros permitidos)
 
+/ticket assumir - membros permitidos com a tag Equipe podem executar, removendo todos os outros membros do ticket, exceto Administradores e o criador
 
-/*
-    DIAS_VENCIMENTO_PONTOS - Qual a validade dos pontos em dias, a partir da avaliação (INTEGER)
-    PONTOS_APROVACAO_AUTOMATICA - Qual o máximo de pontos que deve ter um relatório para ser automaticamente aprovado (INTEGER)
-    MILISSEGUNDOS_AGUARDAR_ENVIO - Quanto tempo o usuário deve aguardar até conseguir enviar um novo relatório (INTEGER)
-    CHECK_CHECKSUM_IMAGEM - Indicativo se o sistema deve bloquear ou não imagens repetidas (0 = não, 1 = sim) (BOOL)
-    MILISSEGUNDOS_APROVACAO_AUTOMATICA - Quanto tempo deve ter passado da última aprovação daquele usuário para que novos relatórios sejam automaticamente aprovados (INTEGER)
-    MULTIPLICADOR_XP_BASE - Multiplicador de XP usado para multiplicar o score (Valor padrão = 1) (Double separado por vírgula)
-*/
+/ticket membro adicionar - adiciona aquele membro ao ticket para participar da discussão
 
+/ticket membro remover - remove um membro permitido do ticket
 
-pendencias-bugd
-
-
-- Usuário RECRUTA (1 PONTO)
-- Envia relatório com 2001 pontos
-- Cargo de soldado é adicionado, cargo de recruta não foi removido
-
-2023-10-21T01:53:44.086708547Z  membro 1163874643493523527 usuario-teste 2002
-2023-10-21T01:53:44.086713218Z  Patentes 1016708001584918618 0
-2023-10-21T01:53:44.086718467Z  Patentes 1016707983004139530 2000
-2023-10-21T01:53:44.086724970Z  Patentes 1016707960438788136 4000
-2023-10-21T01:53:44.086734466Z  Patentes 1016707940155146250 6000
-2023-10-21T01:53:44.086742518Z  Patentes 1016707915974975548 8000
-2023-10-21T01:53:44.086747639Z  Patentes 1016707893099241562 10000
-2023-10-21T01:53:44.086753236Z  Patentes 1016707857317642320 12000
-2023-10-21T01:53:44.086887565Z  Patentes 1016707837864448071 14000
-2023-10-21T01:53:44.086924444Z  Patentes 1016707811482288228 16000
-2023-10-21T01:53:44.086971376Z  Patentes 1016707791060213862 20000
-2023-10-21T01:53:44.087020708Z  Patentes 1016707764321521736 24000
-2023-10-21T01:53:44.087066051Z  Patentes 1016707728913207367 30000
-2023-10-21T01:53:44.087119849Z  Patentes 1016704492986703912 40000
-2023-10-21T01:53:44.090443589Z  Removendo Recruta 1016708001584918618 0 (NÃO FOI DE FATO REMOVIDO)
-2023-10-21T01:53:44.090910228Z  Adicionando Soldado 1016707983004139530 2000
+/ticket permitidos - exibe a lista de cargos e membros que são Permitidas por padrão na criação do Ticket para manutenção (administrador apenas) - cargos que podem: controlar membros, encerrar e assumir
